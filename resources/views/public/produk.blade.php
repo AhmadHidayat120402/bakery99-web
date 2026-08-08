@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('public.layouts.app')
 
 @section('title', 'Katalog Produk & Harga - 99 Bakery Jember')
 

@@ -9,19 +9,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('public.home');
 })->name('home');
 
 Route::get('/produk', function () {
-    return view('produk');
+    return view('public.produk');
 })->name('produk');
 
 Route::get('/tentang', function () {
-    return view('tentang');
+    return view('public.tentang');
 })->name('tentang');
 
 Route::get('/outlet', function () {
-    return view('outlet');
+    return view('public.outlet');
 })->name('outlet');
 
 /*

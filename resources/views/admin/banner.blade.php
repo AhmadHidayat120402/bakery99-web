@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.layouts.admin')
 
 @section('title', 'Kelola Banner & Slider Hero - CMS 99 Bakery')
 

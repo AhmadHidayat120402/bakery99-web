@@ -29,13 +29,13 @@
 <body>
 
   <!-- Top Mini Announcement Bar & Navbar -->
-  @include('partials.navbar')
+  @include('public.partials.navbar')
 
   <!-- Main Content -->
   @yield('content')
 
   <!-- Footer -->
-  @include('partials.footer')
+  @include('public.partials.footer')
 
   <!-- QUICK VIEW PRODUCT MODAL -->
   <div class="modal fade" id="quickViewModal" tabindex="-1" aria-labelledby="modalProductTitle" aria-hidden="true">

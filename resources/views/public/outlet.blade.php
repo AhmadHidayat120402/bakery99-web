@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('public.layouts.app')
 
 @section('title', 'Outlet & Lokasi Gerai - 99 Bakery Jember')
 

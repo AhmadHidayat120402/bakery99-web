@@ -14,7 +14,7 @@
     <div class="menu-category">Ringkasan</div>
     <a href="{{ route('admin.dashboard') }}" class="nav-link-admin {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
       <i class="bi bi-grid-1x2-fill"></i>
-      <span>Ikhtisar CMS</span>
+      <span>Dashboard</span>
     </a>
 
     <div class="menu-category">Pengelola Konten</div>

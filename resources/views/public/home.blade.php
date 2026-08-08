@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('public.layouts.app')
 
 @section('title', '99 Bakery Jember - Spesialis Roti Hajatan, Kue & Snackbox Fresh Every Day')
 

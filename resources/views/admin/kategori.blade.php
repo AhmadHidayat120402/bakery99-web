@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.layouts.admin')
 
 @section('title', 'Kelola Kategori Produk - CMS 99 Bakery')
 
