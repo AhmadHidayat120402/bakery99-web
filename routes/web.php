@@ -29,6 +29,9 @@ Route::get('/outlet', function () {
 | Admin CMS Routes
 |--------------------------------------------------------------------------
 */
+Route::get('/admin', function () {
+    return redirect()->route('admin.dashboard');
+})->name('admin.login');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', function () {
