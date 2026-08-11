@@ -1239,7 +1239,7 @@ section {
 
 .btn-outlet-wa-pill {
   flex: 1;
-  background-color: #25D366;
+  background-color: #1fa250;
   color: #FFFFFF !important;
   font-weight: 700;
   font-size: 0.85rem;
@@ -1831,6 +1831,7 @@ footer a:hover {
   .testimonial-control-btn.prev-btn {
     left: -6px;
   }
+
   .testimonial-control-btn.next-btn {
     right: -6px;
   }
