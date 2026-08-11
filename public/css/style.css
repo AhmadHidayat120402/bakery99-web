@@ -1383,8 +1383,8 @@ section {
 
 /* Footer Styling */
 footer {
-  background-color: #1A1311;
-  color: #D1C7BD;
+  background: linear-gradient(180deg, var(--primary-red) 0%, var(--primary-dark) 100%);
+  color: rgba(255, 255, 255, 0.9);
   padding: 60px 0 20px 0;
   font-size: 0.9rem;
   overflow-x: hidden;
@@ -1397,7 +1397,7 @@ footer h5 {
 }
 
 footer a {
-  color: #BBB0A4;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 footer a:hover {
@@ -1414,7 +1414,7 @@ footer a:hover {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.15);
   color: #FFFFFF;
   display: inline-flex;
   align-items: center;
@@ -1424,8 +1424,8 @@ footer a:hover {
 }
 
 .social-icon-btn:hover {
-  background: var(--primary-red);
-  color: #FFFFFF;
+  background: var(--accent-gold);
+  color: var(--primary-dark);
   transform: translateY(-2px);
 }
 
@@ -1433,8 +1433,8 @@ footer a:hover {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   color: #FFFFFF !important;
   padding: 8px 16px 8px 8px;
   border-radius: 12px;
@@ -1448,21 +1448,21 @@ footer a:hover {
   width: 34px;
   height: 34px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.2);
   font-size: 0.95rem;
   flex-shrink: 0;
 }
 
 .footer-social-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: var(--primary-red);
+  background: rgba(255, 255, 255, 0.22);
+  border-color: var(--accent-gold);
   color: #FFFFFF !important;
   transform: translateX(4px);
 }
 
 .footer-social-btn:hover .social-icon-btn {
-  background: var(--primary-red);
-  color: #FFFFFF;
+  background: var(--accent-gold);
+  color: var(--primary-dark);
 }
 
 /* Floating WhatsApp Button (Desktop Only) */

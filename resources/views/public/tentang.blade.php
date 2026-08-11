@@ -44,9 +44,7 @@
           penyediaan <strong>Roti Hajatan, Snackbox Syukuran, Brownies, Bolen, Kue Basah, Dessert, dan Kue Tart</strong>.
         </p>
         <p class="text-muted mb-4" style="line-height:1.8;">
-          Berdiri dengan tekad memberikan yang terbaik bagi masyarakat Jember, kami senantiasa menggunakan bahan-bahan
-          pilihan bermutu tinggi tanpa pengawet berbahaya, diolah higienis oleh tenaga berpengalaman, serta selalu
-          disajikan <em>fresh baked</em> setiap hari.
+          Dengan tekad untuk selalu memberikan yang terbaik bagi setiap pelanggan, kami senantiasa menggunakan bahan-bahan pilihan bermutu tinggi tanpa pengawet berbahaya, diolah secara higienis oleh tenaga berpengalaman, serta selalu disajikan <em>fresh baked</em> setiap hari
         </p>
         <div class="row g-3">
           <div class="col-6">

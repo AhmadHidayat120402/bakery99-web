@@ -14,12 +14,13 @@
         </div>
 
         <h1 class="hero-title">
-          <span style="color: #FFB300!important">99 Kebahagiaan</span> Untuk Setiap Momen Spesial Anda
+          <span style="color: #FFB300!important">99 Bakery -</span> Rajanya Hajatan
         </h1>
 
         <p class="hero-description">
-          Toko roti spesialis roti hajatan, brownies, bolen, kue basah, dessert, dan snackbox berkualitas dengan rasa
-          lezat, fresh setiap hari, dan harga terjangkau di Jember.
+          Spesialis roti hajatan dengan banyak pilihan, rasa lezat, kemasan menarik, dan harga bersahabat.
+Selain roti hajatan, kami juga menyediakan brownies, bolen, kue basah, dessert, dan snack box yang dibuat fresh setiap hari dengan bahan berkualitas. <br>
+Cocok untuk hajatan, pengajian, syukuran, rapat, acara keluarga, dan berbagai momen spesial anda.
         </p>
 
         <div class="d-flex flex-wrap gap-3 mb-4">
@@ -409,7 +410,7 @@
         <div class="step-card">
           <div class="step-number-badge">3</div>
           <h3 class="step-title">Roti Siap Diterima / Diambil</h3>
-          <p class="step-desc">Pesanan dioven fresh pada hari H dan siap diambil di outlet terdekat atau dikirim langsung ke lokasi.</p>
+          <p class="step-desc"> Pesanan dioven fresh pada hari H dan siap diambil di outlet pilihan Anda.</p>
         </div>
       </div>
     </div>
@@ -517,7 +518,7 @@
             </h3>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionFaq">
               <div class="accordion-body">
-                Anda bisa langsung memilih paket di katalog produk atau mengklik tombol WhatsApp. Pilih outlet terdekat (Tawang Alun / Kampus), tentukan jumlah box yang dibutuhkan, dan tim admin kami akan memproses pesanan serta mengonfirmasi jadwal pengantaran.
+                Anda bisa langsung memilih paket di katalog produk atau mengklik tombol WhatsApp. Pilih outlet terdekat (Tawang Alun / Kampus), tentukan jumlah box yang dibutuhkan, dan tim CS kami akan memproses pesanan serta mengonfirmasi pesanan Anda.
               </div>
             </div>
           </div>
@@ -530,7 +531,7 @@
             </h3>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionFaq">
               <div class="accordion-body">
-                Untuk pemesanan roti hajatan / snack box jumlah besar (di atas 50 box), kami menyarankan untuk melakukan pemesanan H-2 atau H-1 sebelum acara agar tim produksi kami dapat menyiapkan produk yang paling segar (fresh out of the oven) saat waktu acara.
+                Untuk pemesanan roti hajatan / snack box dalam jumlah banyak, kami menyarankan melakukan pemesanan jauh-jauh hari agar kuota produksi masih tersedia. Pemesanan paling lambat dilakukan H-2 sebelum waktu pengambilan, sehingga tim produksi dapat menyiapkan pesanan dengan optimal dan tetap fresh.
               </div>
             </div>
           </div>
@@ -569,7 +570,7 @@
             </h3>
             <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionFaq">
               <div class="accordion-body">
-                Tentu! Kami melayani pengiriman gratis / dengan kurir lokal untuk area Jember dan sekitarnya untuk pemesanan paket hajatan sesuai ketentuan jarak outlet.
+                Saat ini, 99 Bakery belum menyediakan layanan pengiriman secara langsung. Namun, pelanggan dapat menggunakan jasa kurir online pilihan sendiri, dengan biaya ongkir ditanggung oleh pelanggan sesuai tarif yang tertera pada aplikasi.
               </div>
             </div>
           </div>

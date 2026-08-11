@@ -9,7 +9,7 @@
   <meta name="keywords" content="99 bakery, roti hajatan jember, toko roti jember, snackbox jember, brownies jember, bolen pisang, 99 bakery tawang alun, 99 bakery kampus">
 
   <!-- Favicon / Logo -->
-  <link rel="icon" type="image/jpeg" href="{{ asset('img/logo.jpeg') }}">
+  <link rel="icon" type="image/jpeg" href="{{ asset('img/logo-new.png') }}">
 
   <!-- Google Fonts: Outfit (Heading) & Plus Jakarta Sans (Body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
