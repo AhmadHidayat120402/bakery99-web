@@ -54,16 +54,17 @@
     }
 
     .login-brand-img {
-      width: 72px;
-      height: 72px;
-      border-radius: 16px;
-      border: 3px solid #FFFFFF;
+      width: 90px;
+      height: auto;
+      border-radius: 12px;
+      border: 2px solid #FFFFFF;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
       object-fit: cover;
       margin-bottom: 1rem;
     }
 
     .login-title {
+      color: #fff
       font-family: var(--font-heading);
       font-weight: 800;
       font-size: 1.4rem;
@@ -88,7 +89,7 @@
       <div class="login-header">
         <img src="{{ asset('img/logo.jpeg') }}" alt="99 Bakery Logo" class="login-brand-img">
         <h4 class="login-title">99 BAKERY JEMBER</h4>
-        <p class="login-subtitle mb-0">Portal Masuk CMS Admin Landing Page</p>
+        <p class="login-subtitle mb-0">Portal Masuk Admin Landing Page</p>
       </div>
 
       <div class="login-body">
@@ -97,7 +98,7 @@
             <label class="form-label small fw-bold text-dark">Email / Username Admin</label>
             <div class="input-group">
               <span class="input-group-text bg-light border-end-0"><i class="bi bi-person-fill text-muted"></i></span>
-              <input type="email" class="form-control border-start-0 ps-0" value="admin@99bakery.com" placeholder="admin@99bakery.com" required>
+              <input type="email" class="form-control border-start-0 ps-0" value="" placeholder="admin@99bakery.com" required>
             </div>
           </div>
 
@@ -105,7 +106,7 @@
             <label class="form-label small fw-bold text-dark">Kata Sandi (Password)</label>
             <div class="input-group">
               <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock-fill text-muted"></i></span>
-              <input type="password" id="passwordInput" class="form-control border-start-0 border-end-0 ps-0" value="12345678" placeholder="••••••••" required>
+              <input type="password" id="passwordInput" class="form-control border-start-0 border-end-0 ps-0" value="" placeholder="" required>
               <button class="btn btn-light border border-start-0" type="button" onclick="const p = document.getElementById('passwordInput'); p.type = p.type === 'password' ? 'text' : 'password'; this.querySelector('i').classList.toggle('bi-eye-fill'); this.querySelector('i').classList.toggle('bi-eye-slash-fill');">
                 <i class="bi bi-eye-fill text-muted"></i>
               </button>
@@ -121,7 +122,7 @@
           </div>
 
           <button type="submit" class="btn btn-danger w-100 py-2 rounded-pill fw-bold text-white shadow-sm" style="background-color: var(--primary-red); border: none;">
-            <i class="bi bi-box-arrow-in-right me-1"></i> Masuk ke CMS Admin
+            Login
           </button>
         </form>
 
