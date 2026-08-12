@@ -23,6 +23,18 @@
 </div>
 @endif
 
+@if($errors->any())
+<div class="alert alert-danger alert-dismissible fade show rounded-3 mb-4" role="alert">
+  <i class="bi bi-exclamation-triangle-fill me-2"></i> <strong>Gagal menyimpan data:</strong>
+  <ul class="mb-0 mt-1 ps-3">
+    @foreach($errors->all() as $error)
+      <li>{{ $error }}</li>
+    @endforeach
+  </ul>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
 <!-- CATEGORIES TABLE CARD -->
 <div class="admin-card">
   <div class="admin-card-header">

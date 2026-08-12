@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class ProductSeeder extends Seeder
 {
@@ -29,7 +28,7 @@ class ProductSeeder extends Seeder
                 'product_badge_id' => 1, // Best Seller
                 'name' => 'Paket Roti Hajatan Spesial',
                 'slug' => 'paket-roti-hajatan-spesial',
-                'image' => 'img/products/roti/sobek coklat.jpg',
+                'image' => 'uploads/products/1786510288_paket-roti-hajatan-spesial.webp',
                 'price' => 8000,
                 'unit' => 'box',
                 'description' => 'Kombinasi roti lembut pilihan & kue lezat yang dikemas cantik untuk berbagai konsumsi acara syukuran/pernikahan.',
@@ -43,7 +42,7 @@ class ProductSeeder extends Seeder
                 'product_badge_id' => 1, // Best Seller
                 'name' => 'Roti Sobek Pisang Coklat',
                 'slug' => 'roti-sobek-pisang-coklat',
-                'image' => 'img/products/roti/Sobek pisang.jpg',
+                'image' => 'uploads/products/1786510320_roti-sobek-pisang-coklat.webp',
                 'price' => 15000,
                 'unit' => 'pack',
                 'description' => 'Roti sobek lembut dengan isian pisang raja manis & coklat lelehan lumer di mulut. Favorit acara keluarga!',
@@ -56,7 +55,7 @@ class ProductSeeder extends Seeder
                 'product_badge_id' => 4, // Fresh Daily
                 'name' => 'Roti Pizza Spesialis Sosis Besar',
                 'slug' => 'roti-pizza-spesialis-sosis-besar',
-                'image' => 'img/products/roti/Pizza besar.jpg',
+                'image' => 'uploads/products/1786510339_roti-pizza-spesialis-sosis-besar.webp',
                 'price' => 18000,
                 'unit' => 'pcs',
                 'description' => 'Roti empuk dengan topping sosis ayam premium, saus keju gurih, dan taburan oregano segar.',
@@ -70,7 +69,7 @@ class ProductSeeder extends Seeder
                 'product_badge_id' => 1, // Best Seller
                 'name' => 'Fudgy Brownies Shiny Crust (Box)',
                 'slug' => 'fudgy-brownies-shiny-crust-box',
-                'image' => 'img/products/Brownies/panggang box.jpg',
+                'image' => 'uploads/products/1786510480_fudgy-brownies-shiny-crust-box.webp',
                 'price' => 35000,
                 'unit' => 'box',
                 'description' => 'Brownies panggang coklat asli dengan tekstur fudgy legit dan permukaan shiny crust yang krispi.',
@@ -83,7 +82,7 @@ class ProductSeeder extends Seeder
                 'product_badge_id' => 3, // Favorit
                 'name' => 'Bolu Gulung Keju Spesial',
                 'slug' => 'bolu-gulung-keju-spesial',
-                'image' => 'img/products/Bolu/gulung hias keju.jpg',
+                'image' => 'uploads/products/1786510516_bolu-gulung-keju-spesial.webp',
                 'price' => 45000,
                 'unit' => 'loyang',
                 'description' => 'Bolu gulung super lembut berbahan dasar telur segar dengan taburan keju gondrong melimpah di luar dan dalam.',
@@ -97,7 +96,7 @@ class ProductSeeder extends Seeder
                 'product_badge_id' => 2, // Terlaris
                 'name' => 'Bolen Pisang Keju Premium',
                 'slug' => 'bolen-pisang-keju-premium',
-                'image' => 'img/products/Bolen/bolen box.png',
+                'image' => 'uploads/products/1786510545_bolen-pisang-keju-premium.webp',
                 'price' => 30000,
                 'unit' => 'box',
                 'description' => 'Pastry berlapis renyah dengan isian pisang raja manis, keju cheddar parut melimpah, dan mentega wangi.',
@@ -111,7 +110,7 @@ class ProductSeeder extends Seeder
                 'product_badge_id' => 4, // Fresh Daily
                 'name' => 'Donat Kentang Glaze Assorted',
                 'slug' => 'donat-kentang-glaze-assorted',
-                'image' => 'img/products/Donat/donat topping.jpg',
+                'image' => 'uploads/products/1786510218_donat-kentang-glaze-assorted.webp',
                 'price' => 6000,
                 'unit' => 'pcs',
                 'description' => 'Donat kentang empuk dengan varian topping mesis coklat, matcha, keju, dan glaze manis.',
@@ -125,7 +124,7 @@ class ProductSeeder extends Seeder
                 'product_badge_id' => 5, // Spesial
                 'name' => 'Kue Basah Nampan Premium',
                 'slug' => 'kue-basah-nampan-premium',
-                'image' => 'img/products/Kue Basah/Pie Buah.png',
+                'image' => 'uploads/products/1786510795_kue-basah-nampan-premium.webp',
                 'price' => 10000,
                 'unit' => 'paket 3 kue',
                 'description' => 'Aneka pilihan kue basah tradisional dan modern higienis (Lemper, Pastel, Risoles, Pie Buah).',
@@ -139,7 +138,7 @@ class ProductSeeder extends Seeder
                 'product_badge_id' => 1, // Best Seller
                 'name' => 'Kue Tart Birthday Classic',
                 'slug' => 'kue-tart-birthday-classic',
-                'image' => 'img/products/tart/378d5ea7-0433-4872-90ed-b7cc7e646d16.jpg',
+                'image' => 'uploads/products/1786510810_kue-tart-birthday-classic.webp',
                 'price' => 85000,
                 'unit' => 'ukuran 16cm',
                 'description' => 'Kue ulang tahun dengan hiasan butter cream lembut, spiku lezat, dan hiasan custom cantik.',

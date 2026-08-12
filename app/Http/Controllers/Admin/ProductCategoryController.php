@@ -44,7 +44,7 @@ class ProductCategoryController extends Controller
                 'uploads/categories',
                 $validated['name'],
                 800, // max edge 800px
-                80   // quality 80%
+                75   // quality 75%
             );
         }
 
@@ -83,12 +83,17 @@ class ProductCategoryController extends Controller
         }
 
         if ($request->hasFile('image')) {
+            // Delete old uploaded file if exists in uploads/
+            if ($category->image && str_starts_with($category->image, 'uploads/') && file_exists(public_path($category->image))) {
+                @unlink(public_path($category->image));
+            }
+
             $category->image = ImageCompressor::compressAndSave(
                 $request->file('image'),
                 'uploads/categories',
                 $validated['name'],
                 800, // max edge 800px
-                80   // quality 80%
+                75   // quality 75%
             );
         }
 
@@ -111,6 +116,11 @@ class ProductCategoryController extends Controller
      */
     public function destroy(ProductCategory $category)
     {
+        // Delete uploaded file if exists in uploads/
+        if ($category->image && str_starts_with($category->image, 'uploads/') && file_exists(public_path($category->image))) {
+            @unlink(public_path($category->image));
+        }
+
         $category->delete();
 
         return redirect()->route('admin.kategori')->with('success', 'Kategori produk berhasil dihapus!');

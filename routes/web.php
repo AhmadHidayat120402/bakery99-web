@@ -6,6 +6,7 @@ use App\Http\Controllers\Public\ProductController as PublicProductController;
 use App\Http\Controllers\Admin\ProductCategoryController as AdminProductCategoryController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProductBadgeController as AdminProductBadgeController;
+use App\Http\Controllers\Admin\BannerController as AdminBannerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ Route::get('/tentang', function () {
 Route::get('/outlet', function () {
     return view('public.outlet');
 })->name('outlet');
+
+// Batch Image Compression Utility Route
+// Route::get('/resize', [App\Http\Controllers\ImageResizeController::class, 'resizeAll'])->name('resize');
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +50,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         return view('admin.dashboard');
     })->name('dashboard');
 
+    // Admin Banner Routes
+    Route::get('/banner', [AdminBannerController::class, 'index'])->name('banner');
+    Route::post('/banner', [AdminBannerController::class, 'store'])->name('banner.store');
+    Route::post('/banner/reorder', [AdminBannerController::class, 'reorder'])->name('banner.reorder');
+    Route::put('/banner/{banner}', [AdminBannerController::class, 'update'])->name('banner.update');
+    Route::delete('/banner/{banner}', [AdminBannerController::class, 'destroy'])->name('banner.destroy');
+
     // Admin Product Category Routes
     Route::get('/kategori', [AdminProductCategoryController::class, 'index'])->name('kategori');
     Route::post('/kategori', [AdminProductCategoryController::class, 'store'])->name('kategori.store');
@@ -63,10 +74,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/produk', [AdminProductController::class, 'store'])->name('produk.store');
     Route::put('/produk/{product}', [AdminProductController::class, 'update'])->name('produk.update');
     Route::delete('/produk/{product}', [AdminProductController::class, 'destroy'])->name('produk.destroy');
-
-    Route::get('/banner', function () {
-        return view('admin.banner');
-    })->name('banner');
 
     Route::get('/outlet', function () {
         return view('admin.outlet');

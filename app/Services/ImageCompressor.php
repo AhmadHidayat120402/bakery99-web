@@ -17,7 +17,7 @@ class ImageCompressor
      * @param  int     $quality            compression quality 1-100 (default 80)
      * @return string                      relative path to the saved file e.g. 'uploads/products/123456_sobek-pisang.webp'
      */
-    public static function compressAndSave(UploadedFile $file, string $destinationSubdir, string $baseName = 'image', int $maxDimension = 800, int $quality = 80): string
+    public static function compressAndSave(UploadedFile $file, string $destinationSubdir, string $baseName = 'image', int $maxDimension = 800, int $quality = 75): string
     {
         $targetDir = public_path($destinationSubdir);
         if (!file_exists($targetDir)) {

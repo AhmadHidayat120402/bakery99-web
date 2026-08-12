@@ -35,14 +35,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // Clean price formatting (e.g. "55.000" -> 55000)
-        if ($request->has('price')) {
-            $request->merge([
-                'price' => preg_replace('/[^0-9]/', '', $request->price)
-            ]);
+        $input = $request->all();
+        if (isset($input['price'])) {
+            $input['price'] = preg_replace('/[^0-9]/', '', $input['price']);
         }
 
-        $validated = $request->validate([
+        $validated = validator($input, [
             'name' => 'required|string|max:255',
             'product_category_id' => 'required|exists:product_categories,id',
             'product_badge_id' => 'nullable|exists:product_badges,id',
@@ -50,7 +48,7 @@ class ProductController extends Controller
             'unit' => 'nullable|string|max:50',
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:10240',
-        ]);
+        ])->validate();
 
         $slug = Str::slug($validated['name']);
         $count = Product::where('slug', 'LIKE', "{$slug}%")->count();
@@ -65,7 +63,7 @@ class ProductController extends Controller
                 'uploads/products',
                 $validated['name'],
                 800, // max edge 800px
-                80   // quality 80%
+                75   // quality 75%
             );
         }
 
@@ -89,14 +87,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        // Clean price formatting (e.g. "55.000" -> 55000)
-        if ($request->has('price')) {
-            $request->merge([
-                'price' => preg_replace('/[^0-9]/', '', $request->price)
-            ]);
+        $input = $request->all();
+        if (isset($input['price'])) {
+            $input['price'] = preg_replace('/[^0-9]/', '', $input['price']);
         }
 
-        $validated = $request->validate([
+        $validated = validator($input, [
             'name' => 'required|string|max:255',
             'product_category_id' => 'required|exists:product_categories,id',
             'product_badge_id' => 'nullable|exists:product_badges,id',
@@ -104,7 +100,7 @@ class ProductController extends Controller
             'unit' => 'nullable|string|max:50',
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:10240',
-        ]);
+        ])->validate();
 
         if ($validated['name'] !== $product->name) {
             $slug = Str::slug($validated['name']);
@@ -116,12 +112,17 @@ class ProductController extends Controller
         }
 
         if ($request->hasFile('image')) {
+            // Delete old uploaded file if exists in uploads/
+            if ($product->image && str_starts_with($product->image, 'uploads/') && file_exists(public_path($product->image))) {
+                @unlink(public_path($product->image));
+            }
+
             $product->image = ImageCompressor::compressAndSave(
                 $request->file('image'),
                 'uploads/products',
                 $validated['name'],
                 800, // max edge 800px
-                80   // quality 80%
+                75   // quality 75%
             );
         }
 
@@ -143,6 +144,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        // Delete uploaded file if exists in uploads/
+        if ($product->image && str_starts_with($product->image, 'uploads/') && file_exists(public_path($product->image))) {
+            @unlink(public_path($product->image));
+        }
+
         $product->delete();
 
         return redirect()->route('admin.produk')->with('success', 'Produk berhasil dihapus!');
