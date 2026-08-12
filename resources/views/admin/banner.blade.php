@@ -68,7 +68,7 @@
       <tbody id="sortableBannerList" class="list">
         @forelse($banners as $banner)
         <tr data-id="{{ $banner->id }}">
-          <td class="drag-handle-cell drag-handle" title="Arahkan kursor & geser untuk mengubah urutan slide">
+          <td class="drag-handle-cell drag-handle text-center" title="Arahkan kursor & geser untuk mengubah urutan slide">
             <span class="fw-bold text-dark row-number">{{ $loop->iteration }}</span>
             <i class="bi bi-list fs-4 text-danger drag-icon"></i>
           </td>

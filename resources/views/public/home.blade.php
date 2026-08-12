@@ -112,7 +112,7 @@ Cocok untuk hajatan, pengajian, syukuran, rapat, acara keluarga, dan berbagai mo
     <div class="row g-4">
       <div class="col-md-6 col-lg-4">
         <div class="feature-card">
-          <div class="feature-icon-wrapper"><i class="bi bi-stars"></i></div>
+          <div class="feature-icon-wrapper"><i class="bi bi-award"></i></div>
           <h3 class="feature-title">Bahan Berkualitas</h3>
           <p class="feature-desc">Kami hanya menggunakan bahan-bahan pilihan bermutu tinggi untuk menghasilkan rasa yang konsisten, gurih, dan lezat.</p>
         </div>
@@ -133,7 +133,7 @@ Cocok untuk hajatan, pengajian, syukuran, rapat, acara keluarga, dan berbagai mo
       </div>
       <div class="col-md-6 col-lg-4">
         <div class="feature-card">
-          <div class="feature-icon-wrapper"><i class="bi bi-grid-3x3-gap-fill"></i></div>
+          <div class="feature-icon-wrapper"><i class="bi bi-basket"></i></div>
           <h3 class="feature-title">Banyak Pilihan Varian</h3>
           <p class="feature-desc">Mulai dari roti klasik, brownies, bolen, cake, kue basah, dessert, hingga snack box hajatan terlengkap.</p>
         </div>
@@ -147,7 +147,7 @@ Cocok untuk hajatan, pengajian, syukuran, rapat, acara keluarga, dan berbagai mo
       </div>
       <div class="col-md-6 col-lg-4">
         <div class="feature-card">
-          <div class="feature-icon-wrapper"><i class="bi bi-emoji-smile-fill"></i></div>
+          <div class="feature-icon-wrapper"><i class="bi bi-emoji-smile"></i></div>
           <h3 class="feature-title">Pelayanan Ramah</h3>
           <p class="feature-desc">Kepuasan dan kenyamanan Anda dalam memesan menjadi prioritas utama tim customer service dan toko kami.</p>
         </div>
@@ -294,7 +294,7 @@ Cocok untuk hajatan, pengajian, syukuran, rapat, acara keluarga, dan berbagai mo
     <div class="testimonial-slider-wrapper position-relative px-2 px-md-4">
       <div class="testimonial-slider-overflow">
         <div class="testimonial-slider-track" id="testimonialTrack">
-          
+
           <div class="testimonial-slide-item">
             <div class="testimonial-card">
               <div class="testimonial-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>

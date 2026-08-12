@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="{{ asset('vendor/bootstrap-icons/bootstrap-icons.min.css') }}">
 
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/style.css?v=') . date('is') }}">
   @stack('styles')
 </head>
 

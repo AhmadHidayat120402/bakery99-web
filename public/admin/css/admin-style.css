@@ -410,6 +410,37 @@ body.admin-body {
   background-color: rgba(255, 249, 242, 0.6);
 }
 
+/* Drag & Drop Reordering Handles */
+.drag-handle-cell {
+  cursor: grab;
+  text-align: center;
+  user-select: none;
+  width: 60px;
+  vertical-align: middle;
+}
+
+.drag-handle-cell:active {
+  cursor: grabbing;
+}
+
+.drag-handle-cell .drag-icon {
+  display: none !important;
+  line-height: 1;
+}
+
+.drag-handle-cell .row-number {
+  display: inline-block;
+  line-height: 1;
+}
+
+tr:hover .drag-handle-cell .row-number {
+  display: none !important;
+}
+
+tr:hover .drag-handle-cell .drag-icon {
+  display: inline-block !important;
+}
+
 /* Product & Carousel Thumb in Table */
 .img-thumb-admin {
   width: 48px;
