@@ -19,6 +19,66 @@
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="{{ asset('vendor/bootstrap-icons/bootstrap-icons.min.css') }}">
 
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ url()->current() }}">
+
+  <!-- Open Graph Meta Tags (Social Media & WhatsApp Share) -->
+  <meta property="og:site_name" content="99 Bakery Jember">
+  <meta property="og:type" content="@yield('og_type', 'website')">
+  <meta property="og:title" content="@yield('title', '99 Bakery Jember - Spesialis Roti Hajatan, Kue & Snackbox Fresh Every Day')">
+  <meta property="og:description" content="@yield('meta_description', '99 Bakery Jember menghadirkan roti hajatan, brownies, bolen, kue basah, donat, dan snackbox berkualitas dari bahan pilihan, fresh setiap hari dengan harga bersahabat.')">
+  <meta property="og:image" content="@yield('og_image', asset('img/logo-new.png'))">
+  <meta property="og:url" content="{{ url()->current() }}">
+  <meta property="og:locale" content="id_ID">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="@yield('title', '99 Bakery Jember - Spesialis Roti Hajatan, Kue & Snackbox Fresh Every Day')">
+  <meta name="twitter:description" content="@yield('meta_description', '99 Bakery Jember menghadirkan roti hajatan, brownies, bolen, kue basah, donat, dan snackbox berkualitas dari bahan pilihan, fresh setiap hari dengan harga bersahabat.')">
+  <meta name="twitter:image" content="@yield('og_image', asset('img/logo-new.png'))">
+
+  <!-- Schema.org JSON-LD Structured Data (Local Business & Bakery SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Bakery",
+    "name": "99 Bakery Jember",
+    "image": "{{ asset('img/logo-new.png') }}",
+    "@id": "{{ url('/') }}#bakery",
+    "url": "{{ url('/') }}",
+    "telephone": "+628123456789",
+    "priceRange": "Rp",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Jl. Raya Tawang Alun & Area Kampus UNEJ",
+      "addressLocality": "Jember",
+      "addressRegion": "Jawa Timur",
+      "postalCode": "68131",
+      "addressCountry": "ID"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -8.1724,
+      "longitude": 113.7003
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "06:00",
+      "closes": "21:00"
+    }
+  }
+  </script>
+  @stack('schema')
+
   <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="{{ asset('css/style.css?v=') . date('is') }}">
   @stack('styles')

@@ -1,6 +1,7 @@
 @extends('public.layouts.app')
 
 @section('title', 'Outlet & Lokasi Gerai - 99 Bakery Jember')
+@section('meta_description', 'Lokasi outlet resmi 99 Bakery Jember di cabang Tawang Alun dan Area Kampus UNEJ. Siap melayani pesanan roti hajatan, snackbox & kue fresh.')
 
 @section('content')
 <!-- BREADCRUMB & HEADER HERO -->

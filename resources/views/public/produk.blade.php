@@ -1,6 +1,7 @@
 @extends('public.layouts.app')
 
 @section('title', 'Katalog Produk & Harga - 99 Bakery Jember')
+@section('meta_description', 'Katalog lengkap roti hajatan, brownies, bolen pisang, donat, kue basah, dan snackbox murah berkualitas di 99 Bakery Jember.')
 
 @section('content')
 <!-- BREADCRUMB & HEADER -->

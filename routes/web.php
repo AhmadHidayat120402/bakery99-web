@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\ProductController as PublicProductController;
+use App\Http\Controllers\Public\SitemapController;
 use App\Http\Controllers\Admin\ProductCategoryController as AdminProductCategoryController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProductBadgeController as AdminProductBadgeController;
@@ -24,6 +25,8 @@ Route::get('/tentang', function () {
 Route::get('/outlet', function () {
     return view('public.outlet');
 })->name('outlet');
+
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // Batch Image Compression Utility Route
 // Route::get('/resize', [App\Http\Controllers\ImageResizeController::class, 'resizeAll'])->name('resize');

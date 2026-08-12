@@ -1,6 +1,7 @@
 @extends('public.layouts.app')
 
 @section('title', 'Profil & Nilai SONGO - 99 Bakery Jember')
+@section('meta_description', 'Mengenal profil 99 Bakery Jember, sejarah usaha, komitmen kualitas roti hajatan & snackbox, serta nilai keunggulan SONGO.')
 
 @section('content')
 <!-- BREADCRUMB & HEADER HERO -->
