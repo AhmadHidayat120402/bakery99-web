@@ -14,16 +14,6 @@ class BannerSeeder extends Seeder
     {
         $banners = [
             [
-                'title' => 'Spesial Boleh Dicoba',
-                'subtitle' => 'Bolu gulung lembut beralaskan keju cheddar melimpah untuk momen spesial keluarga.',
-                'badge_text' => 'Spesial Boleh Dicoba',
-                'image' => 'uploads/banners/1786511371_spesial-boleh-dicoba.webp',
-                'button_text' => 'Lihat Produk',
-                'button_link' => '/produk',
-                'sort_order' => 1,
-                'is_active' => true,
-            ],
-            [
                 'title' => 'Best Seller Hajatan',
                 'subtitle' => 'Brownies panggang dengan lapisan atas krispi mengkilap & tekstur fudgy legit.',
                 'badge_text' => 'Best Seller Hajatan',

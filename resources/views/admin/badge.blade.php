@@ -67,15 +67,34 @@
             <button class="btn-action-icon me-1" title="Edit Badge" data-bs-toggle="modal" data-bs-target="#modalEditBadge{{ $badge->id }}">
               <i class="bi bi-pencil-square"></i>
             </button>
-            <form action="{{ route('admin.badge.destroy', $badge->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus badge {{ $badge->name }}?');">
-              @csrf
-              @method('DELETE')
-              <button type="submit" class="btn-action-icon btn-action-delete" title="Hapus">
-                <i class="bi bi-trash text-danger"></i>
-              </button>
-            </form>
+            <button class="btn-action-icon btn-action-delete" title="Hapus Badge" data-bs-toggle="modal" data-bs-target="#modalDeleteBadge{{ $badge->id }}">
+              <i class="bi bi-trash text-danger"></i>
+            </button>
           </td>
         </tr>
+
+        <!-- MODAL DELETE BADGE -->
+        <div class="modal fade" id="modalDeleteBadge{{ $badge->id }}" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden text-center p-3">
+              <div class="modal-body py-4">
+                <div class="mb-3 text-danger">
+                  <i class="bi bi-exclamation-triangle-fill display-4"></i>
+                </div>
+                <h5 class="fw-bold text-dark mb-2">Hapus Badge Promo?</h5>
+                <p class="text-muted small mb-4">Apakah Anda yakin ingin menghapus badge <strong>"{{ $badge->name }}"</strong>? Produk yang menggunakan badge ini akan kembali ke mode tanpa badge.</p>
+                <form action="{{ route('admin.badge.destroy', $badge->id) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <div class="d-flex justify-content-center gap-2">
+                    <button type="button" class="btn btn-light btn-sm rounded-pill px-3" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger btn-sm rounded-pill px-3 fw-bold">Ya, Hapus</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- MODAL EDIT BADGE -->
         <div class="modal fade" id="modalEditBadge{{ $badge->id }}" tabindex="-1" aria-hidden="true">
