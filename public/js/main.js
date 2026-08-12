@@ -86,9 +86,9 @@ $(document).ready(function () {
     var outletName = selectedOutlet === "kampus" ? "Outlet Kampus (Jl. Danau Toba 8)" : "Outlet Tawang Alun (Pusat)";
 
     var message = "Halo 99 Bakery, saya ingin memesan produk:\n\n" +
-      "📌 *Produk*: " + currentProductData.title + "\n" +
-      "📦 *Jumlah*: " + qty + " paket/pcs\n" +
-      "🏬 *Pilihan Outlet*: " + outletName + "\n\n" +
+      "- *Produk*: " + currentProductData.title + "\n" +
+      "- *Jumlah*: " + qty + " paket/pcs\n" +
+      "- *Pilihan Outlet*: " + outletName + "\n\n" +
       "Mohon info ketersediaan & konfirmasi total pembayarannya. Terima kasih!";
 
     var waUrl = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
