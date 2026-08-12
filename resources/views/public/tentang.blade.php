@@ -38,7 +38,7 @@
       </div>
       <div class="col-lg-6">
         <div class="section-badge">KOMITMEN KUALITAS</div>
-        <h2 class="section-title">Solusi Roti Fresh & Terpercaya di Jember</h2>
+        <h2 class="section-title">Solusi Roti Fresh & Terpercaya</h2>
         <p class="text-muted mb-3" style="line-height:1.8;">
           <strong>99 Bakery Jember</strong> adalah usaha kuliner spesialis toko roti dan kue yang berfokus pada
           penyediaan <strong>Roti Hajatan, Snackbox Syukuran, Brownies, Bolen, Kue Basah, Dessert, dan Kue Tart</strong>.
