@@ -22,17 +22,21 @@
       <i class="bi bi-images"></i>
       <span>Banner & Carousel Hero</span>
     </a>
-    <a href="{{ route('admin.tentang') }}" class="nav-link-admin {{ request()->routeIs('admin.tentang') ? 'active' : '' }}">
-      <i class="bi bi-card-heading"></i>
-      <span>Konten Tentang Toko</span>
-    </a>
     <a href="{{ route('admin.kategori') }}" class="nav-link-admin {{ request()->routeIs('admin.kategori') ? 'active' : '' }}">
       <i class="bi bi-tags-fill"></i>
-      <span>Kelola Kategori</span>
+      <span>Kategori Produk</span>
     </a>
     <a href="{{ route('admin.produk') }}" class="nav-link-admin {{ request()->routeIs('admin.produk') ? 'active' : '' }}">
       <i class="bi bi-box-seam-fill"></i>
-      <span>Kelola Produk</span>
+      <span>Produk</span>
+    </a>
+    <a href="{{ route('admin.badge') }}" class="nav-link-admin {{ request()->routeIs('admin.badge') ? 'active' : '' }}">
+      <i class="bi bi-patch-check-fill"></i>
+      <span>Badge Promo</span>
+    </a>
+    <a href="{{ route('admin.tentang') }}" class="nav-link-admin {{ request()->routeIs('admin.tentang') ? 'active' : '' }}">
+      <i class="bi bi-card-heading"></i>
+      <span>Konten Tentang Toko</span>
     </a>
     <a href="{{ route('admin.outlet') }}" class="nav-link-admin {{ request()->routeIs('admin.outlet') ? 'active' : '' }}">
       <i class="bi bi-shop"></i>
@@ -104,6 +108,10 @@
       <a href="{{ route('admin.produk') }}" class="nav-link-admin {{ request()->routeIs('admin.produk') ? 'active' : '' }}">
         <i class="bi bi-box-seam-fill"></i>
         <span>Kelola Produk</span>
+      </a>
+      <a href="{{ route('admin.badge') }}" class="nav-link-admin {{ request()->routeIs('admin.badge') ? 'active' : '' }}">
+        <i class="bi bi-patch-check-fill"></i>
+        <span>Badge Promo</span>
       </a>
       <a href="{{ route('admin.outlet') }}" class="nav-link-admin {{ request()->routeIs('admin.outlet') ? 'active' : '' }}">
         <i class="bi bi-shop"></i>

@@ -36,7 +36,15 @@ Cocok untuk hajatan, pengajian, syukuran, rapat, acara keluarga, dan berbagai mo
       <div class="col-lg-6">
         <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3500">
           <div class="carousel-inner rounded-4 shadow-lg border border-3 border-white overflow-hidden">
-            <!-- Slide 1 -->
+            @forelse($banners ?? [] as $index => $banner)
+            <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+              <img src="{{ asset($banner->image) }}" loading="lazy" class="d-block w-100 lazy-blur"
+                alt="{{ $banner->title }}" style="height: 380px; object-fit: cover;">
+              <div class="position-absolute bottom-0 start-0 m-3 bg-white bg-opacity-95 backdrop-blur px-3 py-2 rounded-pill shadow-sm border border-white z-2">
+                <span class="fw-bold text-danger fs-7"><i class="bi bi-star-fill text-warning me-1"></i> {{ $banner->badge_text ?? $banner->title }}</span>
+              </div>
+            </div>
+            @empty
             <div class="carousel-item active">
               <img src="{{ asset('img/products/Bolu/gulung hias keju.jpg') }}" loading="lazy" class="d-block w-100 lazy-blur"
                 alt="Bolu Gulung Keju 99 Bakery" style="height: 380px; object-fit: cover;">
@@ -44,38 +52,16 @@ Cocok untuk hajatan, pengajian, syukuran, rapat, acara keluarga, dan berbagai mo
                 <span class="fw-bold text-danger fs-7"><i class="bi bi-star-fill text-warning me-1"></i> Bolu Gulung Topping Keju</span>
               </div>
             </div>
-            <!-- Slide 2 -->
-            <div class="carousel-item">
-              <img src="{{ asset('img/products/Brownies/panggang box.jpg') }}" loading="lazy" class="d-block w-100 lazy-blur"
-                alt="Fudgy Brownies 99 Bakery" style="height: 380px; object-fit: cover;">
-              <div class="position-absolute bottom-0 start-0 m-3 bg-white bg-opacity-95 backdrop-blur px-3 py-2 rounded-pill shadow-sm border border-white z-2">
-                <span class="fw-bold text-danger fs-7"><i class="bi bi-star-fill text-warning me-1"></i> Fudgy Brownies Shiny Crust</span>
-              </div>
-            </div>
-            <!-- Slide 3 -->
-            <div class="carousel-item">
-              <img src="{{ asset('img/products/Bolen/bolen box.png') }}" loading="lazy" class="d-block w-100 lazy-blur"
-                alt="Bolen Pisang Keju 99 Bakery" style="height: 380px; object-fit: cover;">
-              <div class="position-absolute bottom-0 start-0 m-3 bg-white bg-opacity-95 backdrop-blur px-3 py-2 rounded-pill shadow-sm border border-white z-2">
-                <span class="fw-bold text-danger fs-7"><i class="bi bi-star-fill text-warning me-1"></i> Bolen Pisang Keju Renyah</span>
-              </div>
-            </div>
-            <!-- Slide 4 -->
-            <div class="carousel-item">
-              <img src="{{ asset('img/products/roti/Sobek pisang.jpg') }}" loading="lazy" class="d-block w-100 lazy-blur"
-                alt="Roti Sobek 99 Bakery" style="height: 380px; object-fit: cover;">
-              <div class="position-absolute bottom-0 start-0 m-3 bg-white bg-opacity-95 backdrop-blur px-3 py-2 rounded-pill shadow-sm border border-white z-2">
-                <span class="fw-bold text-danger fs-7"><i class="bi bi-star-fill text-warning me-1"></i> Roti Sobek Soft & Fresh</span>
-              </div>
-            </div>
+            @endforelse
           </div>
           <!-- Indicators -->
+          @if(isset($banners) && count($banners) > 1)
           <div class="carousel-indicators">
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            @foreach($banners as $index => $banner)
+              <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}" aria-current="{{ $index === 0 ? 'true' : 'false' }}" aria-label="Slide {{ $index + 1 }}"></button>
+            @endforeach
           </div>
+          @endif
         </div>
       </div>
     </div>
@@ -94,89 +80,20 @@ Cocok untuk hajatan, pengajian, syukuran, rapat, acara keluarga, dan berbagai mo
     </div>
 
     <div class="row g-3 g-md-4 justify-content-center">
-      <!-- 1. Roti Hajatan & Snack Box -->
+      @forelse($categories ?? [] as $category)
       <div class="col-6 col-md-4 col-lg-3">
-        <a href="{{ route('produk') }}?cat=roti%20hajatan" class="category-card-box">
+        <a href="{{ route('produk') }}" class="category-card-box">
           <div class="category-img-box">
-            <img src="{{ asset('img/products/roti/Sobek pisang.jpg') }}" loading="lazy" class="category-img lazy-blur" alt="Roti Hajatan & Snack Box">
+            <img src="{{ asset($category->image ?? 'img/products/roti/Sobek pisang.jpg') }}" loading="lazy" class="category-img lazy-blur" alt="{{ $category->name }}">
           </div>
-          <h4 class="category-card-title">Roti Hajatan & Snack Box</h4>
-          <p class="category-card-desc">Paket hemat & hantaran acara syukuran, rapat & pernikahan.</p>
+          <h4 class="category-card-title">{{ $category->name }}</h4>
+          <p class="category-card-desc">{{ $category->description }}</p>
           <span class="category-card-link">Lihat Produk <i class="bi bi-arrow-right"></i></span>
         </a>
       </div>
-
-      <!-- 2. Aneka Roti -->
-      <div class="col-6 col-md-4 col-lg-3">
-        <a href="{{ route('produk') }}?cat=aneka%20roti" class="category-card-box">
-          <div class="category-img-box">
-            <img src="{{ asset('img/products/roti/sisir mini pandan.jpg') }}" loading="lazy" class="category-img lazy-blur" alt="Aneka Roti">
-          </div>
-          <h4 class="category-card-title">Aneka Roti</h4>
-          <p class="category-card-desc">Roti sisir, roti sobek & roti isi lembut aromatik.</p>
-          <span class="category-card-link">Lihat Produk <i class="bi bi-arrow-right"></i></span>
-        </a>
-      </div>
-
-      <!-- 3. Brownies & Bolu -->
-      <div class="col-6 col-md-4 col-lg-3">
-        <a href="{{ route('produk') }}?cat=brownies" class="category-card-box">
-          <div class="category-img-box">
-            <img src="{{ asset('img/products/Brownies/panggang box.jpg') }}" loading="lazy" class="category-img lazy-blur" alt="Brownies & Bolu">
-          </div>
-          <h4 class="category-card-title">Brownies & Bolu</h4>
-          <p class="category-card-desc">Fudgy brownies shiny crust & bolu gulung keju melimpah.</p>
-          <span class="category-card-link">Lihat Produk <i class="bi bi-arrow-right"></i></span>
-        </a>
-      </div>
-
-      <!-- 4. Aneka Bolen -->
-      <div class="col-6 col-md-4 col-lg-3">
-        <a href="{{ route('produk') }}?cat=bolen" class="category-card-box">
-          <div class="category-img-box">
-            <img src="{{ asset('img/products/Bolen/bolen box.png') }}" loading="lazy" class="category-img lazy-blur" alt="Aneka Bolen">
-          </div>
-          <h4 class="category-card-title">Aneka Bolen</h4>
-          <p class="category-card-desc">Bolen pisang keju & coklat melted ber-pastry renyah.</p>
-          <span class="category-card-link">Lihat Produk <i class="bi bi-arrow-right"></i></span>
-        </a>
-      </div>
-
-      <!-- 5. Donat & Dessert -->
-      <div class="col-6 col-md-4 col-lg-3">
-        <a href="{{ route('produk') }}?cat=donat" class="category-card-box">
-          <div class="category-img-box">
-            <img src="{{ asset('img/products/Donat/donat topping.jpg') }}" loading="lazy" class="category-img lazy-blur" alt="Donat & Dessert">
-          </div>
-          <h4 class="category-card-title">Donat & Dessert</h4>
-          <p class="category-card-desc">Donat kentang glaze assorted & dessert box red velvet.</p>
-          <span class="category-card-link">Lihat Produk <i class="bi bi-arrow-right"></i></span>
-        </a>
-      </div>
-
-      <!-- 6. Kue Basah -->
-      <div class="col-6 col-md-4 col-lg-3">
-        <a href="{{ route('produk') }}?cat=kue%20basah" class="category-card-box">
-          <div class="category-img-box">
-            <img src="{{ asset('img/products/Kue Basah/Pie Buah.png') }}" loading="lazy" class="category-img lazy-blur" alt="Kue Basah">
-          </div>
-          <h4 class="category-card-title">Kue Basah</h4>
-          <p class="category-card-desc">Aneka kue tradisional & modern higienis berkualitas.</p>
-          <span class="category-card-link">Lihat Produk <i class="bi bi-arrow-right"></i></span>
-        </a>
-      </div>
-
-      <!-- 7. Kue Tart -->
-      <div class="col-6 col-md-4 col-lg-3">
-        <a href="{{ route('produk') }}?cat=kue%20tart" class="category-card-box">
-          <div class="category-img-box">
-            <img src="{{ asset('img/products/tart/378d5ea7-0433-4872-90ed-b7cc7e646d16.jpg') }}" loading="lazy" class="category-img lazy-blur" alt="Kue Tart">
-          </div>
-          <h4 class="category-card-title">Kue Tart</h4>
-          <p class="category-card-desc">Kue tart ulang tahun & spiku lapis hiasan custom cantik.</p>
-          <span class="category-card-link">Lihat Produk <i class="bi bi-arrow-right"></i></span>
-        </a>
-      </div>
+      @empty
+      <div class="col-12 text-center text-muted py-4">Belum ada kategori produk.</div>
+      @endforelse
     </div>
   </div>
 </section>
@@ -250,93 +167,39 @@ Cocok untuk hajatan, pengajian, syukuran, rapat, acara keluarga, dan berbagai mo
       </p>
 
       <div class="row g-2 g-md-4 mb-5">
-        <!-- Item 1: Roti Hajatan -->
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="product-card">
+        @forelse($popularProducts ?? [] as $product)
+        <div class="col-6 col-md-4 col-lg-3 d-flex align-items-stretch">
+          <div class="product-card w-100">
             <div class="product-img-box">
-              <span class="product-badge badge-hajatan">Best Seller Hajatan</span>
-              <img src="{{ asset('img/products/roti/sobek coklat.jpg') }}" loading="lazy" class="product-img lazy-blur" alt="Paket Roti Hajatan Spesial">
+              @if($product->badge)
+                <span class="product-badge shadow-sm" style="background-color: {{ $product->badge->bg_color }}; color: {{ $product->badge->text_color }};">
+                  {{ $product->badge->name }}
+                </span>
+              @endif
+              <img src="{{ asset($product->image) }}" loading="lazy" class="product-img lazy-blur" alt="{{ $product->name }}">
             </div>
             <div class="product-body">
-              <span class="product-category">Roti Hajatan & Snack Box</span>
-              <h3 class="product-title">Paket Roti Hajatan Spesial</h3>
-              <p class="product-desc">Kombinasi roti lembut pilihan & kue lezat yang dikemas cantik untuk berbagai konsumsi acara syukuran/pernikahan.</p>
+              <span class="product-category category">{{ $product->category->name ?? 'Aneka Roti' }}</span>
+              <h3 class="product-title name">{{ $product->name }}</h3>
+              <p class="product-desc desc">{{ $product->description }}</p>
               <div class="product-footer">
                 <div>
-                  <div class="product-price">Rp 8.000</div>
-                  <div class="product-price-note">per box / paket</div>
+                  <div class="product-price price-display">Rp {{ number_format($product->price, 0, ',', '.') }}</div>
+                  <div class="product-price-note">per {{ $product->unit }}</div>
                 </div>
-                <button type="button" class="btn-sm-detail">Detail</button>
+                <button type="button" class="btn-sm-detail"
+                  data-title="{{ $product->name }}"
+                  data-price="Rp {{ number_format($product->price, 0, ',', '.') }}"
+                  data-category="{{ $product->category->name ?? 'Roti' }}"
+                  data-desc="{{ $product->description }}"
+                  data-img="{{ asset($product->image) }}">Detail</button>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- Item 2: Roti Sisir Premium -->
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="product-card">
-            <div class="product-img-box">
-              <span class="product-badge badge-fresh">Fresh Daily</span>
-              <img src="{{ asset('img/products/roti/sisir mini pandan.jpg') }}" loading="lazy" class="product-img lazy-blur" alt="Roti Sisir Mentega Premium">
-            </div>
-            <div class="product-body">
-              <span class="product-category">Aneka Roti</span>
-              <h3 class="product-title">Roti Sisir Mentega Premium</h3>
-              <p class="product-desc">Tekstur sangat lembut beraroma harum mentega asli dengan rasa manis gurih yang memanjakan lidah.</p>
-              <div class="product-footer">
-                <div>
-                  <div class="product-price">Rp 12.000</div>
-                  <div class="product-price-note">porsi isi 4</div>
-                </div>
-                <button type="button" class="btn-sm-detail">Detail</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 3: Fudgy Brownies Almond -->
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="product-card">
-            <div class="product-img-box">
-              <span class="product-badge badge-bestseller">Favorit</span>
-              <img src="{{ asset('img/products/Brownies/panggang box.jpg') }}" loading="lazy" class="product-img lazy-blur" alt="Fudgy Brownies Shiny Crust">
-            </div>
-            <div class="product-body">
-              <span class="product-category">Brownies & Bolu</span>
-              <h3 class="product-title">Fudgy Brownies Shiny Crust</h3>
-              <p class="product-desc">Brownies coklat leleh padat dengan tekstur fudgy dan taburan almond gurih renyah di atasnya.</p>
-              <div class="product-footer">
-                <div>
-                  <div class="product-price">Rp 35.000</div>
-                  <div class="product-price-note">box medium</div>
-                </div>
-                <button type="button" class="btn-sm-detail">Detail</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 4: Bolen Pisang Keju -->
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="product-card">
-            <div class="product-img-box">
-              <span class="product-badge badge-bestseller">Best Seller</span>
-              <img src="{{ asset('img/products/Bolen/bolen box.png') }}" loading="lazy" class="product-img lazy-blur" alt="Bolen Pisang Keju Super">
-            </div>
-            <div class="product-body">
-              <span class="product-category">Aneka Bolen</span>
-              <h3 class="product-title">Bolen Pisang Keju Super</h3>
-              <p class="product-desc">Pastry berlapis renyah dipadu isian pisang manis raja dan keju gurih melimpah.</p>
-              <div class="product-footer">
-                <div>
-                  <div class="product-price">Rp 32.000</div>
-                  <div class="product-price-note">isi 10 pcs</div>
-                </div>
-                <button type="button" class="btn-sm-detail">Detail</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        @empty
+        <div class="col-12 text-center text-muted py-4">Belum ada produk favorit.</div>
+        @endforelse
       </div>
 
       <div class="text-center mb-5">

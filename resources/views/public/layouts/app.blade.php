@@ -46,9 +46,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-4">
-          <div class="placeholder-box mb-3 py-4">
-            <i class="bi bi-cake2-fill placeholder-icon"></i>
-            <small class="fw-bold text-dark">Slot Foto Detail Produk</small>
+          <div class="text-center mb-3">
+            <img id="modalProductImage" src="" class="img-fluid rounded-4 shadow-sm w-100" style="max-height: 220px; object-fit: cover;">
           </div>
 
           <h4 class="fw-bold text-dark mb-1" id="modalProductTitle">Nama Produk</h4>

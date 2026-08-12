@@ -42,19 +42,25 @@ $(document).ready(function () {
 
   $(document).on("click", ".btn-sm-detail, .open-quickview", function (e) {
     e.preventDefault();
-    var card = $(this).closest(".product-card");
-    if (!card.length) return;
+    var btn = $(this);
+    var card = btn.closest(".product-card");
 
-    currentProductData.title = card.find(".product-title, .name").text().trim();
-    currentProductData.price = card.find(".product-price, .price-display").text().trim();
-    currentProductData.category = card.find(".product-category, .category").text().trim();
-    currentProductData.desc = card.find(".product-desc, .desc").text().trim();
+    currentProductData.title = btn.attr("data-title") || card.find(".product-title, .name").text().trim();
+    currentProductData.price = btn.attr("data-price") || card.find(".product-price, .price-display").text().trim();
+    currentProductData.category = btn.attr("data-category") || card.find(".product-category, .category").text().trim();
+    currentProductData.desc = btn.attr("data-desc") || card.find(".product-desc, .desc").text().trim();
+    var imgSrc = btn.attr("data-img") || card.find("img.product-img").attr("src");
 
     // Set Modal Fields
     $("#modalProductTitle").text(currentProductData.title);
     $("#modalProductCategory").text(currentProductData.category);
     $("#modalProductPrice").text(currentProductData.price);
     $("#modalProductDesc").text(currentProductData.desc);
+    if (imgSrc) {
+      $("#modalProductImage").attr("src", imgSrc).show();
+    } else {
+      $("#modalProductImage").hide();
+    }
     $("#modalProductQty").val(1);
 
     updateModalWaLink();
