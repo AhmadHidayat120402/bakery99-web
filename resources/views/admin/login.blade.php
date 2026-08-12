@@ -9,10 +9,8 @@
   <!-- Favicon / Logo -->
   <link rel="icon" type="image/jpeg" href="{{ asset('img/logo.jpeg') }}">
 
-  <!-- Google Fonts: Outfit (Heading) & Plus Jakarta Sans (Body) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Local Web Fonts: Fraunces (Heading) & Plus Jakarta Sans (Body) -->
+  <link rel="stylesheet" href="{{ asset('fonts/fonts.css') }}">
 
   <!-- Bootstrap 5.3 CSS -->
   <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
