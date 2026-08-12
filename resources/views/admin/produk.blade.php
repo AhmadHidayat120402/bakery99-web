@@ -36,17 +36,23 @@
 @endif
 
 <!-- DATATABLE ITEM PRODUK -->
-<div class="admin-card">
+<div class="admin-card" id="adminProductListApp">
   <div class="admin-card-header flex-wrap gap-2">
     <div>
       <h5 class="admin-card-title">Katalog Roti & Kue Landing Page</h5>
       <span class="text-muted" style="font-size: 0.8rem;">Daftar item produk yang dipajang di katalog produk (Total {{ $products->count() }} item)</span>
     </div>
-    <div class="d-flex align-items-center gap-3">
+    <div class="d-flex align-items-center flex-wrap gap-2">
       <!-- BUTTON MODAL TABEL PRODUK UNGGULAN -->
       <button type="button" class="btn btn-sm btn-outline-warning text-dark border-warning rounded-pill px-3 py-1.5 fw-bold shadow-sm" data-bs-toggle="modal" data-bs-target="#modalFeaturedProductsTable" id="btnOpenFeaturedTableModal">
         <i class="bi bi-star-fill text-warning me-1"></i> Produk Unggulan: <span id="featuredCountBadgeText">{{ $featuredProducts->count() }}</span>/8 Slot
       </button>
+
+      <!-- LIVE SEARCH INPUT -->
+      <div class="position-relative">
+        <input type="text" class="form-control form-control-sm search shadow-none" placeholder="Cari nama / deskripsi..." style="width: 200px; border-radius: 20px; padding-left: 36px;">
+        <i class="bi bi-search position-absolute top-50 translate-middle-y text-muted small" style="left: 14px; pointer-events: none;"></i>
+      </div>
 
       <form action="{{ route('admin.produk') }}" method="GET" id="filterCategoryForm">
         <select name="category_id" class="form-select form-select-sm" style="width: auto; border-radius: 20px;" onchange="document.getElementById('filterCategoryForm').submit();">
@@ -65,32 +71,32 @@
         <tr>
           <th style="width: 40px;">No</th>
           <th>Foto Roti</th>
-          <th>Nama Produk</th>
-          <th>Kategori</th>
-          <th>Harga Landing Page</th>
+          <th class="sort cursor-pointer" data-sort="name">Nama Produk <i class="bi bi-arrow-down-up small text-muted"></i></th>
+          <th class="sort cursor-pointer" data-sort="category">Kategori <i class="bi bi-arrow-down-up small text-muted"></i></th>
+          <th class="sort cursor-pointer" data-sort="price">Harga <i class="bi bi-arrow-down-up small text-muted"></i></th>
           <th>Badge Promo</th>
           <th class="text-center" style="width: 100px;">Unggulan</th>
           <th class="text-end">Aksi</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="list">
         @forelse($products as $product)
         <tr id="productRow{{ $product->id }}">
-          <td class="fw-bold text-muted">{{ $loop->iteration }}</td>
+          <td class="fw-bold text-muted row-number">{{ $loop->iteration }}</td>
           <td>
             <img src="{{ asset($product->image) }}" class="img-thumb-admin" alt="{{ $product->name }}" style="width: 54px; height: 54px; object-fit: cover; border-radius: 8px;">
           </td>
           <td>
             <div class="fw-bold text-dark d-flex align-items-center gap-2">
-              <span class="product-name-text">{{ $product->name }}</span>
+              <span class="product-name-text name">{{ $product->name }}</span>
               <span class="badge bg-warning-subtle text-dark border border-warning px-2 py-0.5 rounded-pill fw-bold featured-badge-inline {{ $product->is_popular ? '' : 'd-none' }}" style="font-size: 0.7rem;" title="Tampil di Seksi Produk Unggulan Beranda">
                 <i class="bi bi-star-fill text-warning me-1"></i> Unggulan
               </span>
             </div>
-            <span class="text-muted" style="font-size: 0.78rem;">{{ Str::limit($product->description, 45) }}</span>
+            <span class="text-muted desc" style="font-size: 0.78rem;">{{ Str::limit($product->description, 45) }}</span>
           </td>
-          <td><span class="badge bg-light text-dark border">{{ $product->category->name ?? 'Uncategorized' }}</span></td>
-          <td class="fw-bold text-danger">Rp {{ number_format($product->price, 0, ',', '.') }} <span class="text-muted fw-normal fs-7">/ {{ $product->unit }}</span></td>
+          <td><span class="badge bg-light text-dark border category">{{ $product->category->name ?? 'Uncategorized' }}</span></td>
+          <td class="fw-bold text-danger price">Rp {{ number_format($product->price, 0, ',', '.') }} <span class="text-muted fw-normal fs-7">/ {{ $product->unit }}</span></td>
           <td>
             @if($product->badge)
               <span class="badge px-2.5 py-1 rounded-pill fw-bold shadow-sm" style="background-color: {{ $product->badge->bg_color }}; color: {{ $product->badge->text_color }}; font-size: 0.75rem;">
@@ -225,6 +231,26 @@
         @endforelse
       </tbody>
     </table>
+  </div>
+
+  <!-- LIST.JS PAGINATION FOOTER -->
+  <div class="admin-card-footer d-flex align-items-center justify-content-between flex-wrap gap-3 py-3 px-4 border-top bg-light">
+    <div class="d-flex align-items-center gap-3 flex-wrap">
+      <div class="d-flex align-items-center gap-2">
+        <span class="small text-muted" style="font-size: 0.82rem;">Tampilkan:</span>
+        <select class="form-select form-select-sm per-page-select" style="width: auto; border-radius: 20px;">
+          <option value="10" selected>10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="all">Semua</option>
+        </select>
+        <span class="small text-muted" style="font-size: 0.82rem;">data</span>
+      </div>
+      <div class="small text-muted border-start ps-3 d-none d-sm-block">
+        Menampilkan <span class="fw-bold text-dark product-page-start">1</span> - <span class="fw-bold text-dark product-page-end">10</span> dari <span class="fw-bold text-dark product-page-total">{{ $products->count() }}</span> total data
+      </div>
+    </div>
+    <ul class="pagination pagination-sm mb-0"></ul>
   </div>
 </div>
 
@@ -657,6 +683,47 @@ document.addEventListener('DOMContentLoaded', function () {
     setTimeout(function() {
       if (toastWrapper) toastWrapper.remove();
     }, 3000);
+  }
+
+  // 8. List.js Pagination & Per Page Selector Initialization
+  if (document.getElementById('adminProductListApp')) {
+    const productList = new List('adminProductListApp', {
+      valueNames: ['name', 'category', 'desc', 'price'],
+      page: 10,
+      pagination: {
+        innerWindow: 2,
+        left: 0,
+        right: 0,
+        paginationClass: 'pagination'
+      }
+    });
+
+    const updatePageInfo = () => {
+      const total = productList.matchingItems.length;
+      const page = productList.page;
+      const i = productList.i;
+      const start = total === 0 ? 0 : i;
+      const end = Math.min(i + page - 1, total);
+
+      document.querySelectorAll('.product-page-start').forEach(el => el.textContent = start);
+      document.querySelectorAll('.product-page-end').forEach(el => el.textContent = end);
+      document.querySelectorAll('.product-page-total').forEach(el => el.textContent = total);
+    };
+
+    productList.on('updated', updatePageInfo);
+    updatePageInfo();
+
+    document.querySelectorAll('.per-page-select').forEach(select => {
+      select.addEventListener('change', function () {
+        const val = this.value;
+        if (val === 'all') {
+          productList.page = 10000;
+        } else {
+          productList.page = parseInt(val, 10);
+        }
+        productList.update();
+      });
+    });
   }
 });
 </script>

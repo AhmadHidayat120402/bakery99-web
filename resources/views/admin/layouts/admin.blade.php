@@ -50,8 +50,9 @@
 
   </div>
 
-  <!-- jQuery & Bootstrap 5.3 JS Bundle -->
+  <!-- jQuery, List.js & Bootstrap 5.3 JS Bundle -->
   <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ asset('vendor/listjs/list.min.js') }}"></script>
   <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <!-- Custom Admin JS -->
   <script src="{{ asset('admin/js/admin.js') }}"></script>

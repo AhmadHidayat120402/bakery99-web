@@ -1,41 +1,17 @@
 @extends('admin.layouts.admin')
 
-@section('title', 'Kelola Banner Carousel Hero - CMS 99 Bakery')
-
-@push('styles')
-<style>
-.drag-handle-cell {
-  cursor: grab;
-  user-select: none;
-  width: 60px;
-  text-align: center;
-}
-.drag-handle-cell .drag-icon {
-  display: none;
-}
-tr:hover .drag-handle-cell .row-number {
-  display: none !important;
-}
-tr:hover .drag-handle-cell .drag-icon {
-  display: inline-block !important;
-}
-tr.sortable-ghost {
-  opacity: 0.4;
-  background-color: #ffebee !important;
-}
-</style>
-@endpush
+@section('title', 'Kelola Hero Carousel Banner - CMS 99 Bakery')
 
 @section('content')
 <!-- Page Header -->
 <div class="page-header-box">
   <div>
-    <h1 class="page-title-text">Kelola Banner Carousel Hero</h1>
-    <p class="page-subtitle-text">Atur foto slide carousel & teks badge promo pada jumbotron beranda publik. Arahkan kursor pada angka urutan untuk menggeser baris.</p>
+    <h1 class="page-title-text">Kelola Hero Carousel Banner</h1>
+    <p class="page-subtitle-text">Atur foto slider carousel pada bagian kanan jumbotron utama lengkap dengan teks badge promo & fitur drag & drop urutan.</p>
   </div>
   <div>
     <button class="btn-99-primary" data-bs-toggle="modal" data-bs-target="#modalTambahBanner">
-      <i class="bi bi-plus-lg"></i> Tambah Banner Baru
+      <i class="bi bi-plus-lg"></i> Tambah Slide Banner
     </button>
   </div>
 </div>
@@ -60,13 +36,21 @@ tr.sortable-ghost {
 @endif
 
 <!-- BANNERS TABLE CARD -->
-<div class="admin-card">
-  <div class="admin-card-header d-flex align-items-center justify-content-between">
+<div class="admin-card" id="adminBannerListApp">
+  <div class="admin-card-header flex-wrap gap-2">
     <div>
       <h5 class="admin-card-title">Daftar Slide Banner Jumbotron</h5>
       <span class="text-muted" style="font-size: 0.8rem;">Total {{ $banners->count() }} slide banner terdaftar (Arahkan kursor ke nomor untuk geser)</span>
     </div>
-    <span class="badge bg-light text-muted border px-3 py-1.5 rounded-pill"><i class="bi bi-arrows-move me-1"></i> Hover nomor untuk geser urutan</span>
+    <div class="d-flex align-items-center flex-wrap gap-2">
+      <!-- LIVE SEARCH INPUT -->
+      <div class="position-relative">
+        <input type="text" class="form-control form-control-sm search shadow-none" placeholder="Cari teks badge..." style="width: 200px; border-radius: 20px; padding-left: 36px;">
+        <i class="bi bi-search position-absolute top-50 translate-middle-y text-muted small" style="left: 14px; pointer-events: none;"></i>
+      </div>
+
+      <span class="badge bg-light text-muted border px-3 py-1.5 rounded-pill"><i class="bi bi-arrows-move me-1"></i> Hover nomor untuk geser</span>
+    </div>
   </div>
 
   <div class="table-responsive">
@@ -75,13 +59,13 @@ tr.sortable-ghost {
         <tr>
           <th style="width: 60px;" class="text-center">#</th>
           <th>Foto Banner</th>
-          <th>Teks Badge Promo</th>
+          <th class="sort cursor-pointer" data-sort="badge-text">Teks Badge Promo <i class="bi bi-arrow-down-up small text-muted"></i></th>
           <th style="width: 80px;">Urutan</th>
           <th>Status</th>
           <th class="text-end">Aksi</th>
         </tr>
       </thead>
-      <tbody id="sortableBannerList">
+      <tbody id="sortableBannerList" class="list">
         @forelse($banners as $banner)
         <tr data-id="{{ $banner->id }}">
           <td class="drag-handle-cell drag-handle" title="Arahkan kursor & geser untuk mengubah urutan slide">
@@ -92,7 +76,7 @@ tr.sortable-ghost {
             <img src="{{ asset($banner->image) }}" class="img-thumb-admin shadow-sm" alt="{{ $banner->badge_text }}" style="width: 95px; height: 55px; object-fit: cover; border-radius: 8px;">
           </td>
           <td>
-            <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-1.5 rounded-pill fw-bold" style="font-size: 0.82rem;">
+            <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-1.5 rounded-pill fw-bold badge-text" style="font-size: 0.82rem;">
               <i class="bi bi-star-fill text-warning me-1"></i> {{ $banner->badge_text }}
             </span>
           </td>
@@ -149,38 +133,32 @@ tr.sortable-ghost {
                 <form action="{{ route('admin.banner.update', $banner->id) }}" method="POST" enctype="multipart/form-data">
                   @csrf
                   @method('PUT')
-                  
-                  <div class="row g-2 mb-3">
-                    <div class="col-8">
-                      <label class="form-label fw-semibold small">Teks Badge Promo <span class="text-danger">*</span></label>
-                      <input type="text" name="badge_text" class="form-control" value="{{ $banner->badge_text }}" placeholder="Contoh: BEST SELLER HAJATAN" required>
-                    </div>
-                    <div class="col-4">
-                      <label class="form-label fw-semibold small">Urutan Tampil</label>
-                      <input type="number" name="sort_order" class="form-control" value="{{ $banner->sort_order }}">
+
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold small">Teks Badge Promo (Wajib)</label>
+                    <input type="text" name="badge_text" class="form-control" value="{{ $banner->badge_text }}" placeholder="Contoh: ⭐ BEST SELLER HAJATAN" required>
+                  </div>
+
+                  <!-- UPLOAD FOTO WITH LIVE PREVIEW EDIT -->
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold small d-block">Ganti Foto Banner Carousel (Opsional)</label>
+                    <div class="product-upload-box text-center p-3 border border-2 border-dashed rounded-3 bg-light position-relative" style="border-color: #d1d5db;">
+                      <input type="file" name="image" class="form-control position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer img-upload-trigger" accept="image/*" style="z-index: 10;">
+                      <div class="upload-preview-container mt-1">
+                        <img src="{{ asset($banner->image) }}" class="img-fluid rounded-3 shadow-sm preview-image-target" style="max-height: 140px; object-fit: contain;">
+                        <div class="mt-2"><span class="badge bg-secondary rounded-pill px-3 py-1">Klik untuk Ganti Foto</span></div>
+                      </div>
                     </div>
                   </div>
 
-                  <!-- UPLOAD GAMBAR BANNER WITH LIVE PREVIEW (EDIT) -->
-                  <div class="mb-3">
-                    <label class="form-label fw-semibold small d-block">Ganti Gambar Banner (Opsional)</label>
-                    <div class="banner-upload-box text-center p-3 border border-2 border-dashed rounded-3 bg-light position-relative" style="border-color: #d1d5db;">
-                      <input type="file" name="image" class="form-control position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer img-upload-trigger" accept="image/*" style="z-index: 10;">
-                      <div class="upload-placeholder-content d-none">
-                        <i class="bi bi-cloud-arrow-up-fill fs-2 text-danger"></i>
-                        <div class="fw-bold small text-dark mt-1">Klik atau Geser Foto ke Sini</div>
-                        <small class="text-muted d-block" style="font-size: 0.75rem;">Format JPG, PNG, WEBP (Maks 10MB)</small>
-                      </div>
-                      <div class="upload-preview-container mt-1">
-                        <img src="{{ asset($banner->image) }}" class="img-fluid rounded-3 shadow-sm preview-image-target" style="max-height: 160px; object-fit: contain;">
-                        <div class="mt-2"><span class="badge bg-secondary rounded-pill px-3 py-1">Klik untuk Ganti Foto Banner</span></div>
-                      </div>
-                    </div>
+                  <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" name="is_active" value="1" id="bannerActive{{ $banner->id }}" {{ $banner->is_active ? 'checked' : '' }}>
+                    <label class="form-check-label fw-semibold small" for="bannerActive{{ $banner->id }}">Tampilkan Slide ini di Hero Carousel</label>
                   </div>
 
                   <div class="d-flex justify-content-end gap-2">
                     <button type="button" class="btn btn-secondary btn-sm rounded-pill" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-dark btn-sm rounded-pill">Update Banner</button>
+                    <button type="submit" class="btn btn-danger btn-sm rounded-pill">Simpan Perubahan</button>
                   </div>
                 </form>
               </div>
@@ -189,49 +167,64 @@ tr.sortable-ghost {
         </div>
         @empty
         <tr>
-          <td colspan="6" class="text-center py-4 text-muted">Belum ada slide banner terdaftar.</td>
+          <td colspan="6" class="text-center py-5 text-muted">Belum ada slide banner. Silakan tambah banner baru.</td>
         </tr>
         @endforelse
       </tbody>
     </table>
   </div>
+
+  <!-- LIST.JS PAGINATION FOOTER -->
+  <div class="admin-card-footer d-flex align-items-center justify-content-between flex-wrap gap-3 py-3 px-4 border-top bg-light">
+    <div class="d-flex align-items-center gap-3 flex-wrap">
+      <div class="d-flex align-items-center gap-2">
+        <span class="small text-muted" style="font-size: 0.82rem;">Tampilkan:</span>
+        <select class="form-select form-select-sm per-page-select" style="width: auto; border-radius: 20px;">
+          <option value="10" selected>10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="all">Semua</option>
+        </select>
+        <span class="small text-muted" style="font-size: 0.82rem;">data</span>
+      </div>
+      <div class="small text-muted border-start ps-3 d-none d-sm-block">
+        Menampilkan <span class="fw-bold text-dark banner-page-start">1</span> - <span class="fw-bold text-dark banner-page-end">10</span> dari <span class="fw-bold text-dark banner-page-total">{{ $banners->count() }}</span> total data
+      </div>
+    </div>
+    <ul class="pagination pagination-sm mb-0"></ul>
+  </div>
 </div>
 
-<!-- MODAL TAMBAH BANNER -->
+<!-- MODAL TAMBAH BANNER BARU -->
 <div class="modal fade" id="modalTambahBanner" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
       <div class="modal-header bg-danger text-white py-3">
-        <h5 class="modal-title fw-bold fs-6"><i class="bi bi-plus-circle me-1"></i> Tambah Banner Carousel Baru</h5>
+        <h5 class="modal-title fw-bold fs-6"><i class="bi bi-plus-circle me-1"></i> Tambah Slide Banner Baru</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-4">
         <form action="{{ route('admin.banner.store') }}" method="POST" enctype="multipart/form-data">
           @csrf
           
-          <div class="row g-2 mb-3">
-            <div class="col-8">
-              <label class="form-label fw-semibold small">Teks Badge Promo <span class="text-danger">*</span></label>
-              <input type="text" name="badge_text" class="form-control" placeholder="Contoh: BEST SELLER HAJATAN" required>
-            </div>
-            <div class="col-4">
-              <label class="form-label fw-semibold small">Urutan Tampil</label>
-              <input type="number" name="sort_order" class="form-control" value="{{ $banners->count() + 1 }}">
-            </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold small">Teks Badge Promo (Wajib)</label>
+            <input type="text" name="badge_text" class="form-control" placeholder="Contoh: ⭐ BEST SELLER HAJATAN" required>
+            <small class="text-muted" style="font-size: 0.75rem;">Teks ini akan tampil di atas gambar slider carousel.</small>
           </div>
 
-          <!-- UPLOAD GAMBAR BANNER WITH LIVE PREVIEW (WAJIB/REQUIRED) -->
+          <!-- UPLOAD FOTO WITH LIVE PREVIEW TAMBAH -->
           <div class="mb-3">
-            <label class="form-label fw-semibold small d-block">Upload Gambar Banner <span class="text-danger">*</span></label>
-            <div class="banner-upload-box text-center p-3 border border-2 border-dashed rounded-3 bg-light position-relative" style="border-color: #d1d5db;">
-              <input type="file" name="image" class="form-control position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer img-upload-trigger" accept="image/*" style="z-index: 10;" required>
+            <label class="form-label fw-semibold small d-block">Upload Gambar Banner Carousel (Wajib)</label>
+            <div class="product-upload-box text-center p-3 border border-2 border-dashed rounded-3 bg-light position-relative" style="border-color: #d1d5db;">
+              <input type="file" name="image" class="form-control position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer img-upload-trigger" accept="image/*" required style="z-index: 10;">
               <div class="upload-placeholder-content">
                 <i class="bi bi-cloud-arrow-up-fill fs-2 text-danger"></i>
                 <div class="fw-bold small text-dark mt-1">Klik atau Geser Foto ke Sini</div>
-                <small class="text-muted d-block" style="font-size: 0.75rem;">Format JPG, PNG, WEBP (Otomatis Kompresi WebP HD)</small>
+                <small class="text-muted d-block" style="font-size: 0.75rem;">Format JPG, PNG, WEBP (Maks 2MB)</small>
               </div>
               <div class="upload-preview-container mt-1 d-none">
-                <img src="" class="img-fluid rounded-3 shadow-sm preview-image-target" style="max-height: 160px; object-fit: contain;">
+                <img src="" class="img-fluid rounded-3 shadow-sm preview-image-target" style="max-height: 140px; object-fit: contain;">
                 <div class="mt-2"><span class="badge bg-danger rounded-pill px-3 py-1">Ganti Foto</span></div>
               </div>
             </div>
@@ -239,7 +232,7 @@ tr.sortable-ghost {
 
           <div class="d-flex justify-content-end gap-2">
             <button type="button" class="btn btn-secondary btn-sm rounded-pill" data-bs-dismiss="modal">Batal</button>
-            <button type="submit" class="btn btn-danger btn-sm rounded-pill">Simpan Banner</button>
+            <button type="submit" class="btn btn-danger btn-sm rounded-pill">Simpan Slide Banner</button>
           </div>
         </form>
       </div>
@@ -248,15 +241,15 @@ tr.sortable-ghost {
 </div>
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  // 1. Live Image Preview for Banner Upload Box
+  // Live Image Preview Handler
   document.querySelectorAll('.img-upload-trigger').forEach(function (fileInput) {
     fileInput.addEventListener('change', function (e) {
       const file = e.target.files[0];
       if (file) {
-        const uploadBox = fileInput.closest('.banner-upload-box');
+        const uploadBox = fileInput.closest('.product-upload-box');
         const placeholder = uploadBox.querySelector('.upload-placeholder-content');
         const previewContainer = uploadBox.querySelector('.upload-preview-container');
         const previewImg = uploadBox.querySelector('.preview-image-target');
@@ -272,44 +265,74 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // 2. Drag & Drop Reordering via SortableJS
-  const sortableList = document.getElementById('sortableBannerList');
-  if (sortableList) {
-    new Sortable(sortableList, {
+  // SortableJS for Drag and Drop Reordering
+  const sortableEl = document.getElementById('sortableBannerList');
+  if (sortableEl) {
+    Sortable.create(sortableEl, {
       handle: '.drag-handle',
       animation: 150,
-      ghostClass: 'sortable-ghost',
       onEnd: function () {
         const orders = [];
-        document.querySelectorAll('#sortableBannerList tr[data-id]').forEach(function (row, index) {
-          const newIndex = index + 1;
-          row.querySelector('.row-number').textContent = newIndex;
-          const badgeUrutan = row.querySelector('.badge-urutan');
-          if (badgeUrutan) badgeUrutan.textContent = '#' + newIndex;
-
-          orders.push({
-            id: row.getAttribute('data-id'),
-            sort_order: newIndex
-          });
+        $('#sortableBannerList tr').each(function (index) {
+          const bannerId = $(this).data('id');
+          $(this).find('.badge-urutan').text('#' + (index + 1));
+          $(this).find('.row-number').text(index + 1);
+          orders.push({ id: bannerId, sort_order: index + 1 });
         });
 
-        // Send AJAX request to reorder in database
-        fetch("{{ route('admin.banner.reorder') }}", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        $.ajax({
+          url: "{{ route('admin.banner.reorder') }}",
+          type: "POST",
+          data: {
+            _token: "{{ csrf_token() }}",
+            orders: orders
           },
-          body: JSON.stringify({ orders: orders })
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log("Urutan slide berhasil disimpan:", data);
-        })
-        .catch(error => {
-          console.error("Gagal menyimpan urutan:", error);
+          success: function (res) {
+            console.log("Banner order updated successfully");
+          }
         });
       }
+    });
+  }
+
+  // List.js Initialization for Admin Banner Table
+  if (document.getElementById('adminBannerListApp')) {
+    const bannerList = new List('adminBannerListApp', {
+      valueNames: ['badge-text'],
+      page: 10,
+      pagination: {
+        innerWindow: 2,
+        left: 0,
+        right: 0,
+        paginationClass: 'pagination'
+      }
+    });
+
+    const updatePageInfo = () => {
+      const total = bannerList.matchingItems.length;
+      const page = bannerList.page;
+      const i = bannerList.i;
+      const start = total === 0 ? 0 : i;
+      const end = Math.min(i + page - 1, total);
+
+      document.querySelectorAll('.banner-page-start').forEach(el => el.textContent = start);
+      document.querySelectorAll('.banner-page-end').forEach(el => el.textContent = end);
+      document.querySelectorAll('.banner-page-total').forEach(el => el.textContent = total);
+    };
+
+    bannerList.on('updated', updatePageInfo);
+    updatePageInfo();
+
+    document.querySelectorAll('.per-page-select').forEach(select => {
+      select.addEventListener('change', function () {
+        const val = this.value;
+        if (val === 'all') {
+          bannerList.page = 10000;
+        } else {
+          bannerList.page = parseInt(val, 10);
+        }
+        bannerList.update();
+      });
     });
   }
 });
