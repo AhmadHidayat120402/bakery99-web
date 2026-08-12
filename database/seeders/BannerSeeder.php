@@ -17,7 +17,7 @@ class BannerSeeder extends Seeder
                 'title' => 'Best Seller Hajatan',
                 'subtitle' => 'Brownies panggang dengan lapisan atas krispi mengkilap & tekstur fudgy legit.',
                 'badge_text' => 'Best Seller Hajatan',
-                'image' => 'uploads/banners/1786511077_best-seller-hajatan.webp',
+                'image' => 'uploads/banners/1786512898_best-seller-hajatan.webp',
                 'button_text' => 'Pesan via WA',
                 'button_link' => 'https://wa.me/6285257220335',
                 'sort_order' => 2,
