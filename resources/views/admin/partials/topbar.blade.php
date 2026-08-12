@@ -5,10 +5,6 @@
       data-bs-target="#offcanvasAdminSidebar">
       <i class="bi bi-list fs-5"></i>
     </button>
-    <div class="topbar-search d-none d-sm-block">
-      <i class="bi bi-search"></i>
-      <input type="text" placeholder="Cari bagian landing page...">
-    </div>
   </div>
 
   <div class="topbar-right">
