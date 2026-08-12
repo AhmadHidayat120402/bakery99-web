@@ -160,13 +160,13 @@ Cocok untuk hajatan, pengajian, syukuran, rapat, acara keluarga, dan berbagai mo
 <section id="produk" class="bg-warm-section">
   <div class="container">
     <div class="text-center">
-      <div class="section-badge">KATALOG PRODUK</div>
-      <h2 class="section-title">Temukan Favorit Anda</h2>
+      <div class="section-badge">PRODUK UNGGULAN</div>
+      <h2 class="section-title">Pilihan Terfavorit Pelanggan</h2>
       <p class="section-subtitle">
-        Dari roti klasik hingga aneka cake modern, setiap produk dibuat dari bahan berkualitas untuk memberikan kelezatan istimewa.
+        Produk unggulan racikan terbaik 99 Bakery yang paling diminati untuk menyempurnakan setiap momen istimewa Anda.
       </p>
 
-      <div class="row g-2 g-md-4 mb-5">
+      <div class="row g-2 g-md-4 mb-5 d-flex align-items-center justify-content-center">
         @forelse($popularProducts ?? [] as $product)
         <div class="col-6 col-md-4 col-lg-3 d-flex align-items-stretch">
           <div class="product-card w-100">

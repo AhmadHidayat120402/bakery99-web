@@ -72,6 +72,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Admin Product Routes
     Route::get('/produk', [AdminProductController::class, 'index'])->name('produk');
     Route::post('/produk', [AdminProductController::class, 'store'])->name('produk.store');
+    Route::post('/produk/{product}/toggle-featured', [AdminProductController::class, 'toggleFeatured'])->name('produk.toggle-featured');
     Route::put('/produk/{product}', [AdminProductController::class, 'update'])->name('produk.update');
     Route::delete('/produk/{product}', [AdminProductController::class, 'destroy'])->name('produk.destroy');
 

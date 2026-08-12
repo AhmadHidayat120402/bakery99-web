@@ -26,8 +26,9 @@ class ProductController extends Controller
         $products = $query->get();
         $categories = ProductCategory::where('is_active', true)->orderBy('name')->get();
         $badges = ProductBadge::where('is_active', true)->orderBy('name')->get();
+        $featuredProducts = Product::where('is_popular', true)->with('category')->orderBy('updated_at', 'desc')->get();
 
-        return view('admin.produk', compact('products', 'categories', 'badges'));
+        return view('admin.produk', compact('products', 'categories', 'badges', 'featuredProducts'));
     }
 
     /**
@@ -76,6 +77,7 @@ class ProductController extends Controller
             'unit' => $validated['unit'] ?? 'pcs',
             'description' => $validated['description'] ?? null,
             'image' => $imagePath,
+            'is_popular' => false,
             'is_active' => true,
         ]);
 
@@ -137,6 +139,60 @@ class ProductController extends Controller
         $product->save();
 
         return redirect()->route('admin.produk')->with('success', 'Data produk berhasil diperbarui!');
+    }
+
+    /**
+     * Toggle featured status (is_popular) via AJAX.
+     */
+    public function toggleFeatured(Request $request, Product $product)
+    {
+        $swapId = $request->input('swap_product_id');
+
+        // Case 1: Swapping one featured product with this one
+        if ($swapId) {
+            Product::where('id', $swapId)->update(['is_popular' => false]);
+            $product->update(['is_popular' => true]);
+            
+            return response()->json([
+                'success' => true,
+                'message' => "{$product->name} berhasil dijadikan Produk Unggulan!",
+                'featured_count' => Product::where('is_popular', true)->count(),
+                'featured_products' => Product::where('is_popular', true)->with('category')->get(),
+            ]);
+        }
+
+        // Case 2: Toggling OFF
+        if ($product->is_popular) {
+            $product->update(['is_popular' => false]);
+            return response()->json([
+                'success' => true,
+                'is_popular' => false,
+                'message' => "{$product->name} dilepas dari Produk Unggulan.",
+                'featured_count' => Product::where('is_popular', true)->count(),
+                'featured_products' => Product::where('is_popular', true)->with('category')->get(),
+            ]);
+        }
+
+        // Case 3: Toggling ON - check quota (8/8)
+        $currentCount = Product::where('is_popular', true)->count();
+        if ($currentCount >= 8) {
+            return response()->json([
+                'success' => false,
+                'quota_full' => true,
+                'message' => 'Kuota produk unggulan sudah penuh (8/8). Silakan pilih produk mana yang ingin digantikan.',
+                'featured_products' => Product::where('is_popular', true)->with('category')->get(),
+            ], 422);
+        }
+
+        // Quota has space (<8), set to true
+        $product->update(['is_popular' => true]);
+        return response()->json([
+            'success' => true,
+            'is_popular' => true,
+            'message' => "{$product->name} berhasil ditambahkan ke Produk Unggulan!",
+            'featured_count' => Product::where('is_popular', true)->count(),
+            'featured_products' => Product::where('is_popular', true)->with('category')->get(),
+        ]);
     }
 
     /**
