@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 
-@section('title', 'CMS Admin Landing Page - 99 Bakery Jember')
+@section('title', 'Admin Landing Page')
 
 @section('content')
 <!-- Page Header -->

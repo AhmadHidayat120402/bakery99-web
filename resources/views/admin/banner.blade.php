@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 
-@section('title', 'Kelola Hero Carousel Banner - CMS 99 Bakery')
+@section('title', 'Kelola Hero Carousel Banner')
 
 @section('content')
 <!-- Page Header -->
@@ -206,7 +206,7 @@
       <div class="modal-body p-4">
         <form action="{{ route('admin.banner.store') }}" method="POST" enctype="multipart/form-data">
           @csrf
-          
+
           <div class="mb-3">
             <label class="form-label fw-semibold small">Teks Badge Promo (Wajib)</label>
             <input type="text" name="badge_text" class="form-control" placeholder="Contoh: ⭐ BEST SELLER HAJATAN" required>

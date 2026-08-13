@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 
-@section('title', 'Kelola Kategori Produk - CMS 99 Bakery')
+@section('title', 'Kelola Kategori Produk')
 
 @section('content')
 <!-- Page Header -->

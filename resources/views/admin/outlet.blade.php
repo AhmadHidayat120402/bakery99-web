@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 
-@section('title', 'Kelola Outlet & Kontak Landing Page - CMS 99 Bakery')
+@section('title', 'Kelola Outlet & Kontak Landing Page')
 
 @section('content')
 <!-- Page Header -->

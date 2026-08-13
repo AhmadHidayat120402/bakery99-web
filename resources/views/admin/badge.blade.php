@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 
-@section('title', 'Kelola Badge Promo Produk - CMS 99 Bakery')
+@section('title', 'Kelola Badge Promo Produk')
 
 @section('content')
 <!-- Page Header -->
@@ -165,7 +165,7 @@
                       <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#2E7D32" data-text="#FFFFFF" style="background-color: #2E7D32;">Hijau Daily</button>
                       <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#6A1B9A" data-text="#FFFFFF" style="background-color: #6A1B9A;">Ungu Spesial</button>
                       <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#1565C0" data-text="#FFFFFF" style="background-color: #1565C0;">Biru New</button>
-                      
+
                       <!-- LIGHT / PASTEL PRESETS -->
                       <button type="button" class="btn btn-sm px-3 rounded-pill border btn-preset-color fw-bold" data-bg="#FFF8E1" data-text="#B78103" style="background-color: #FFF8E1; color: #B78103; border-color: #FFE082 !important;">Light Gold</button>
                       <button type="button" class="btn btn-sm px-3 rounded-pill border btn-preset-color fw-bold" data-bg="#FFEBEE" data-text="#C62828" style="background-color: #FFEBEE; color: #C62828; border-color: #FFCDD2 !important;">Light Merah</button>
@@ -251,7 +251,7 @@
       <div class="modal-body p-4">
         <form action="{{ route('admin.badge.store') }}" method="POST">
           @csrf
-          
+
           <div class="mb-3">
             <label class="form-label fw-semibold small">Nama Label Badge</label>
             <input type="text" name="name" id="inputNameCreate" class="form-control" placeholder="Contoh: Best Seller / Fresh Daily" required>
@@ -287,7 +287,7 @@
               <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#2E7D32" data-text="#FFFFFF" style="background-color: #2E7D32;">Hijau Daily</button>
               <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#6A1B9A" data-text="#FFFFFF" style="background-color: #6A1B9A;">Ungu Spesial</button>
               <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#1565C0" data-text="#FFFFFF" style="background-color: #1565C0;">Biru New</button>
-              
+
               <!-- LIGHT / PASTEL PRESETS -->
               <button type="button" class="btn btn-sm px-3 rounded-pill border btn-preset-color fw-bold" data-bg="#FFF8E1" data-text="#B78103" style="background-color: #FFF8E1; color: #B78103; border-color: #FFE082 !important;">Light Gold</button>
               <button type="button" class="btn btn-sm px-3 rounded-pill border btn-preset-color fw-bold" data-bg="#FFEBEE" data-text="#C62828" style="background-color: #FFEBEE; color: #C62828; border-color: #FFCDD2 !important;">Light Merah</button>

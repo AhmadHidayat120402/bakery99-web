@@ -19,7 +19,7 @@
         <p class="text-muted mb-0 small">Temukan varian pilihan roti hajatan, brownies, bolen, kue basah, dessert, dan kue tart fresh setiap hari.</p>
       </div>
       <div>
-        <a href="{{ asset('catalog.pdf') }}" target="_blank" download class="btn btn-danger btn-sm shadow-sm px-3 py-2 fw-bold d-inline-flex align-items-center gap-2">
+        <a href="{{ asset('pdf/catalog.pdf') }}" target="_blank" download class="btn btn-danger btn-sm shadow-sm px-3 py-2 fw-bold d-inline-flex align-items-center gap-2">
           <i class="bi bi-download fs-6"></i> Unduh Katalog (PDF)
         </a>
       </div>
@@ -30,7 +30,7 @@
 <!-- MAIN PRODUCT CATALOG SECTION -->
 <section class="py-5">
   <div class="container" id="productListApp">
-    
+
     <!-- Search Bar & Category Filter Pills -->
     <div class="bg-white p-4 rounded-4 border shadow-sm mb-4">
       <div class="mb-3">

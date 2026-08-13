@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 
-@section('title', 'Kelola Item Produk Landing Page - CMS 99 Bakery')
+@section('title', 'Kelola Item Produk Landing Page')
 
 @section('content')
 <!-- Page Header -->
@@ -194,8 +194,8 @@
                     <label class="form-label fw-semibold small d-block mb-1">Badge Promo (Opsional)</label>
                     <input type="hidden" name="product_badge_id" class="input-badge-edit-{{ $product->id }}" value="{{ $product->product_badge_id }}">
                     <div class="d-flex flex-wrap gap-2 mb-2">
-                      <button type="button" 
-                              class="btn btn-sm rounded-pill badge-picker-pill btn-badge-picker-edit-{{ $product->id }} {{ empty($product->product_badge_id) ? 'btn-dark text-white active shadow-sm' : 'btn-outline-secondary' }}" 
+                      <button type="button"
+                              class="btn btn-sm rounded-pill badge-picker-pill btn-badge-picker-edit-{{ $product->id }} {{ empty($product->product_badge_id) ? 'btn-dark text-white active shadow-sm' : 'btn-outline-secondary' }}"
                               data-badge-id=""
                               data-bg=""
                               data-text=""
@@ -208,10 +208,10 @@
                           $isSelected = ($product->product_badge_id == $b->id);
                           $darkColor = (strtolower($b->text_color) == '#ffffff') ? $b->bg_color : $b->text_color;
                         @endphp
-                        <button type="button" 
-                                class="btn btn-sm rounded-pill badge-picker-pill btn-badge-picker-edit-{{ $product->id }} {{ $isSelected ? 'active' : '' }}" 
-                                data-badge-id="{{ $b->id }}" 
-                                data-bg="{{ $b->bg_color }}" 
+                        <button type="button"
+                                class="btn btn-sm rounded-pill badge-picker-pill btn-badge-picker-edit-{{ $product->id }} {{ $isSelected ? 'active' : '' }}"
+                                data-badge-id="{{ $b->id }}"
+                                data-bg="{{ $b->bg_color }}"
                                 data-text="{{ $b->text_color }}"
                                 data-dark-color="{{ $darkColor }}"
                                 data-name="{{ $b->name }}"
@@ -342,8 +342,8 @@
             <label class="form-label fw-semibold small d-block mb-1">Badge Promo (Opsional)</label>
             <input type="hidden" name="product_badge_id" id="inputBadgeCreate" value="">
             <div class="d-flex flex-wrap gap-2 mb-2">
-              <button type="button" 
-                      class="btn btn-sm btn-dark text-white rounded-pill badge-picker-pill btn-badge-picker-create active shadow-sm" 
+              <button type="button"
+                      class="btn btn-sm btn-dark text-white rounded-pill badge-picker-pill btn-badge-picker-create active shadow-sm"
                       data-badge-id=""
                       data-bg=""
                       data-text=""
@@ -355,8 +355,8 @@
                 @php
                   $darkColor = (strtolower($b->text_color) == '#ffffff') ? $b->bg_color : $b->text_color;
                 @endphp
-                <button type="button" 
-                        class="btn btn-sm rounded-pill badge-picker-pill btn-badge-picker-create" 
+                <button type="button"
+                        class="btn btn-sm rounded-pill badge-picker-pill btn-badge-picker-create"
                         data-badge-id="{{ $b->id }}"
                         data-bg="{{ $b->bg_color }}"
                         data-text="{{ $b->text_color }}"
