@@ -23,13 +23,13 @@ class HomeController extends Controller
         $popularProducts = Product::where('is_active', true)
             ->where('is_popular', true)
             ->with(['category', 'badge'])
-            ->orderBy('updated_at', 'desc')
+            ->orderBy('featured_sort_order', 'asc')
             ->take(8)
             ->get();
 
-        // Fallback to latest products if no featured product is checked
+        // Fallback to sorted products if no featured product is checked
         if ($popularProducts->isEmpty()) {
-            $popularProducts = Product::where('is_active', true)->with(['category', 'badge'])->latest()->take(8)->get();
+            $popularProducts = Product::where('is_active', true)->with(['category', 'badge'])->orderBy('sort_order', 'asc')->take(8)->get();
         }
 
         $faqs = Faq::where('is_active', true)->orderBy('sort_order', 'asc')->get();

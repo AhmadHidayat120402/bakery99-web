@@ -40,13 +40,15 @@
   <div class="admin-card-header flex-wrap gap-2">
     <div>
       <h5 class="admin-card-title">Katalog Roti & Kue Landing Page</h5>
-      <span class="text-muted" style="font-size: 0.8rem;">Daftar item produk yang dipajang di katalog produk (Total {{ $products->count() }} item)</span>
+      <span class="text-muted" style="font-size: 0.8rem;">Daftar item produk yang dipajang di katalog produk (Total {{ $products->count() }} item • Arahkan kursor ke nomor untuk geser)</span>
     </div>
     <div class="d-flex align-items-center flex-wrap gap-2">
       <!-- BUTTON MODAL TABEL PRODUK UNGGULAN -->
       <button type="button" class="btn btn-sm btn-outline-warning text-dark border-warning rounded-pill px-3 py-1.5 fw-bold shadow-sm" data-bs-toggle="modal" data-bs-target="#modalFeaturedProductsTable" id="btnOpenFeaturedTableModal">
         <i class="bi bi-star-fill text-warning me-1"></i> Produk Unggulan: <span id="featuredCountBadgeText">{{ $featuredProducts->count() }}</span>/8 Slot
       </button>
+
+      <span class="badge bg-light text-muted border px-3 py-1.5 rounded-pill"><i class="bi bi-arrows-move me-1"></i> Hover nomor untuk geser</span>
 
       <!-- LIVE SEARCH INPUT -->
       <div class="position-relative">
@@ -69,7 +71,7 @@
     <table class="table table-admin align-middle">
       <thead>
         <tr>
-          <th style="width: 40px;">No</th>
+          <th style="width: 60px;" class="text-center">#</th>
           <th>Foto Roti</th>
           <th class="sort cursor-pointer" data-sort="name">Nama Produk <i class="bi bi-arrow-down-up small text-muted"></i></th>
           <th class="sort cursor-pointer" data-sort="category">Kategori <i class="bi bi-arrow-down-up small text-muted"></i></th>
@@ -79,10 +81,13 @@
           <th class="text-end">Aksi</th>
         </tr>
       </thead>
-      <tbody class="list">
+      <tbody id="sortableProductList" class="list">
         @forelse($products as $product)
-        <tr id="productRow{{ $product->id }}">
-          <td class="fw-bold text-muted row-number">{{ $loop->iteration }}</td>
+        <tr id="productRow{{ $product->id }}" data-id="{{ $product->id }}">
+          <td class="drag-handle-cell drag-handle text-center" title="Arahkan kursor & geser untuk mengubah urutan produk">
+            <span class="fw-bold text-dark row-number">{{ $loop->iteration }}</span>
+            <i class="bi bi-list fs-4 text-danger drag-icon"></i>
+          </td>
           <td>
             <img src="{{ asset($product->image) }}" class="img-thumb-admin" alt="{{ $product->name }}" style="width: 54px; height: 54px; object-fit: cover; border-radius: 8px;">
           </td>
@@ -407,23 +412,24 @@
 </div>
 
 <!-- MODAL 1: TABEL PRODUK UNGGULAN (Daftar 8 Produk Unggulan Tampil) -->
-<div class="modal fade" id="modalFeaturedProductsTable" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modalFeaturedProductsTable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
       <div class="modal-header bg-warning text-dark py-3">
-        <h5 class="modal-title fw-bold fs-6"><i class="bi bi-star-fill text-warning me-1"></i> Kelola Daftar Produk Unggulan Beranda</h5>
+        <h5 class="modal-title fw-bold fs-6"><i class="bi bi-star-fill text-warning me-1"></i> Kelola Daftar Produk Unggulan Halaman Utama</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-4">
-        <div class="alert alert-warning border border-warning bg-warning-subtle text-dark small rounded-3 mb-3">
-          <i class="bi bi-info-circle-fill me-1"></i> Berikut adalah daftar produk yang saat ini <strong>ditampilkan di seksi Produk Unggulan Halaman Utama</strong> (Maksimal 8 produk).
+        <div class="alert alert-warning border border-warning bg-warning-subtle text-dark small rounded-3 mb-3 d-flex align-items-center justify-content-between flex-wrap gap-2">
+          <div><i class="bi bi-star-fill text-warning me-1"></i> Daftar produk yang saat ini <strong>ditampilkan di seksi Produk Unggulan Halaman Utama</strong> (Maksimal 8 produk).</div>
+          <span class="badge bg-light text-dark border"><i class="bi bi-arrows-move me-1"></i> Geser nomor untuk atur urutan produk</span>
         </div>
 
         <div class="table-responsive">
           <table class="table table-hover align-middle mb-0" style="font-size: 0.88rem;">
             <thead class="table-light">
               <tr>
-                <th>#</th>
+                <th style="width: 55px;" class="text-center">#</th>
                 <th>Foto</th>
                 <th>Nama Produk</th>
                 <th>Kategori</th>
@@ -433,8 +439,11 @@
             </thead>
             <tbody id="featuredModalTableBody">
               @forelse($featuredProducts as $fp)
-              <tr id="featuredModalRow{{ $fp->id }}">
-                <td class="fw-bold text-muted">{{ $loop->iteration }}</td>
+              <tr id="featuredModalRow{{ $fp->id }}" data-id="{{ $fp->id }}">
+                <td class="drag-handle-cell drag-handle-featured text-center cursor-pointer" title="Arahkan kursor & geser untuk mengubah urutan tampil di beranda">
+                  <span class="fw-bold text-dark row-number featured-row-number">{{ $loop->iteration }}</span>
+                  <i class="bi bi-list fs-4 text-warning drag-icon"></i>
+                </td>
                 <td>
                   <img src="{{ asset($fp->image) }}" style="width: 42px; height: 42px; object-fit: cover; border-radius: 6px;">
                 </td>
@@ -504,8 +513,67 @@
 </div>
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+  // SortableJS for Drag and Drop Product Reordering
+  const sortableProductEl = document.getElementById('sortableProductList');
+  if (sortableProductEl) {
+    Sortable.create(sortableProductEl, {
+      handle: '.drag-handle',
+      animation: 150,
+      onEnd: function () {
+        const orders = [];
+        $('#sortableProductList tr').each(function (index) {
+          const productId = $(this).data('id');
+          $(this).find('.row-number').text(index + 1);
+          orders.push({ id: productId, sort_order: index + 1 });
+        });
+
+        $.ajax({
+          url: "{{ route('admin.produk.reorder') }}",
+          type: "POST",
+          data: {
+            _token: "{{ csrf_token() }}",
+            orders: orders
+          },
+          success: function (res) {
+            showToastMessage('Urutan katalog produk berhasil diperbarui!');
+          }
+        });
+      }
+    });
+  }
+
+  // SortableJS for Drag and Drop Featured Products Reordering in Modal
+  const sortableFeaturedEl = document.getElementById('featuredModalTableBody');
+  if (sortableFeaturedEl) {
+    Sortable.create(sortableFeaturedEl, {
+      handle: '.drag-handle-featured',
+      animation: 150,
+      onEnd: function () {
+        const orders = [];
+        $('#featuredModalTableBody tr[data-id]').each(function (index) {
+          const productId = $(this).data('id');
+          $(this).find('.featured-row-number').text(index + 1);
+          orders.push({ id: productId, sort_order: index + 1 });
+        });
+
+        $.ajax({
+          url: "{{ route('admin.produk.reorder') }}",
+          type: "POST",
+          data: {
+            _token: "{{ csrf_token() }}",
+            type: "featured",
+            orders: orders
+          },
+          success: function (res) {
+            showToastMessage('Urutan Produk Unggulan di Beranda berhasil diperbarui!');
+          }
+        });
+      }
+    });
+  }
   const toggleUrlTemplate = "{{ route('admin.produk.toggle-featured', ':id') }}";
   const csrfToken = "{{ csrf_token() }}";
   let targetProductToEnable = null;
@@ -687,8 +755,11 @@ document.addEventListener('DOMContentLoaded', function () {
       const catName = fp.category ? fp.category.name : 'Aneka Roti';
       const imgUrl = '{{ asset("") }}' + fp.image;
 
-      const rowHtml = '<tr id="featuredModalRow' + fp.id + '">' +
-        '<td class="fw-bold text-muted">' + (index + 1) + '</td>' +
+      const rowHtml = '<tr id="featuredModalRow' + fp.id + '" data-id="' + fp.id + '">' +
+        '<td class="drag-handle-cell drag-handle-featured text-center cursor-pointer" title="Arahkan kursor & geser untuk mengubah urutan tampil di beranda">' +
+          '<span class="fw-bold text-dark row-number featured-row-number">' + (index + 1) + '</span>' +
+          '<i class="bi bi-list fs-4 text-warning drag-icon"></i>' +
+        '</td>' +
         '<td><img src="' + imgUrl + '" style="width: 42px; height: 42px; object-fit: cover; border-radius: 6px;"></td>' +
         '<td><span class="fw-bold text-dark">' + fp.name + '</span></td>' +
         '<td><span class="badge bg-light text-dark border">' + catName + '</span></td>' +

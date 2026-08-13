@@ -17,7 +17,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Product::with(['category', 'badge'])->latest();
+        $query = Product::with(['category', 'badge'])->orderBy('sort_order', 'asc');
 
         if ($request->filled('category_id') && $request->category_id !== 'all') {
             $query->where('product_category_id', $request->category_id);
@@ -26,7 +26,7 @@ class ProductController extends Controller
         $products = $query->get();
         $categories = ProductCategory::where('is_active', true)->orderBy('name')->get();
         $badges = ProductBadge::where('is_active', true)->orderBy('name')->get();
-        $featuredProducts = Product::where('is_popular', true)->with('category')->orderBy('updated_at', 'desc')->get();
+        $featuredProducts = Product::where('is_popular', true)->with('category')->orderBy('featured_sort_order', 'asc')->get();
 
         return view('admin.produk', compact('products', 'categories', 'badges', 'featuredProducts'));
     }
@@ -79,6 +79,7 @@ class ProductController extends Controller
             'image' => $imagePath,
             'is_popular' => false,
             'is_active' => true,
+            'sort_order' => (Product::max('sort_order') ?? 0) + 1,
         ]);
 
         return redirect()->route('admin.produk')->with('success', 'Produk baru berhasil ditambahkan!');
@@ -150,14 +151,20 @@ class ProductController extends Controller
 
         // Case 1: Swapping one featured product with this one
         if ($swapId) {
+            $swapProduct = Product::find($swapId);
+            $targetOrder = $swapProduct ? $swapProduct->featured_sort_order : 1;
+
             Product::where('id', $swapId)->update(['is_popular' => false]);
-            $product->update(['is_popular' => true]);
+            $product->update([
+                'is_popular' => true,
+                'featured_sort_order' => $targetOrder
+            ]);
             
             return response()->json([
                 'success' => true,
                 'message' => "{$product->name} berhasil dijadikan Produk Unggulan!",
                 'featured_count' => Product::where('is_popular', true)->count(),
-                'featured_products' => Product::where('is_popular', true)->with('category')->get(),
+                'featured_products' => Product::where('is_popular', true)->with('category')->orderBy('featured_sort_order', 'asc')->get(),
             ]);
         }
 
@@ -169,7 +176,7 @@ class ProductController extends Controller
                 'is_popular' => false,
                 'message' => "{$product->name} dilepas dari Produk Unggulan.",
                 'featured_count' => Product::where('is_popular', true)->count(),
-                'featured_products' => Product::where('is_popular', true)->with('category')->get(),
+                'featured_products' => Product::where('is_popular', true)->with('category')->orderBy('featured_sort_order', 'asc')->get(),
             ]);
         }
 
@@ -180,18 +187,23 @@ class ProductController extends Controller
                 'success' => false,
                 'quota_full' => true,
                 'message' => 'Kuota produk unggulan sudah penuh (8/8). Silakan pilih produk mana yang ingin digantikan.',
-                'featured_products' => Product::where('is_popular', true)->with('category')->get(),
+                'featured_products' => Product::where('is_popular', true)->with('category')->orderBy('featured_sort_order', 'asc')->get(),
             ], 422);
         }
 
         // Quota has space (<8), set to true
-        $product->update(['is_popular' => true]);
+        $nextFeaturedOrder = (Product::where('is_popular', true)->max('featured_sort_order') ?? 0) + 1;
+        $product->update([
+            'is_popular' => true,
+            'featured_sort_order' => $nextFeaturedOrder
+        ]);
+
         return response()->json([
             'success' => true,
             'is_popular' => true,
             'message' => "{$product->name} berhasil ditambahkan ke Produk Unggulan!",
             'featured_count' => Product::where('is_popular', true)->count(),
-            'featured_products' => Product::where('is_popular', true)->with('category')->get(),
+            'featured_products' => Product::where('is_popular', true)->with('category')->orderBy('featured_sort_order', 'asc')->get(),
         ]);
     }
 
@@ -208,5 +220,28 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('admin.produk')->with('success', 'Produk berhasil dihapus!');
+    }
+
+    /**
+     * Reorder products via drag & drop AJAX.
+     */
+    public function reorder(Request $request)
+    {
+        $orders = $request->input('orders', []);
+        $type = $request->input('type', 'main');
+        $column = ($type === 'featured') ? 'featured_sort_order' : 'sort_order';
+
+        foreach ($orders as $item) {
+            if (isset($item['id']) && isset($item['sort_order'])) {
+                Product::where('id', $item['id'])->update([
+                    $column => $item['sort_order']
+                ]);
+            }
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Urutan produk berhasil diperbarui!'
+        ]);
     }
 }

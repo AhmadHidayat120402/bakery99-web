@@ -37,13 +37,15 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap')
 |--------------------------------------------------------------------------
 */
 Route::get('/admin', function () {
-    return redirect()->route('admin.dashboard');
-})->name('admin.login');
+    return "test";
+});
+
+Route::get('/login', function () {
+    return view('public.login');
+})->name('login');
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/login', function () {
-        return view('admin.login');
-    })->name('login');
+
 
     Route::get('/', function () {
         return redirect()->route('admin.dashboard');
@@ -75,6 +77,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Admin Product Routes
     Route::get('/produk', [AdminProductController::class, 'index'])->name('produk');
     Route::post('/produk', [AdminProductController::class, 'store'])->name('produk.store');
+    Route::post('/produk/reorder', [AdminProductController::class, 'reorder'])->name('produk.reorder');
     Route::post('/produk/{product}/toggle-featured', [AdminProductController::class, 'toggleFeatured'])->name('produk.toggle-featured');
     Route::put('/produk/{product}', [AdminProductController::class, 'update'])->name('produk.update');
     Route::delete('/produk/{product}', [AdminProductController::class, 'destroy'])->name('produk.destroy');

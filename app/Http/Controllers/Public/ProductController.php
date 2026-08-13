@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $categories = ProductCategory::where('is_active', true)->orderBy('sort_order', 'asc')->get();
-        $products = Product::where('is_active', true)->with(['category', 'badge'])->latest()->get();
+        $products = Product::where('is_active', true)->with(['category', 'badge'])->orderBy('sort_order', 'asc')->get();
 
         return view('public.produk', compact('categories', 'products'));
     }
