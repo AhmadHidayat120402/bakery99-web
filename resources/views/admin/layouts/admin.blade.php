@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@yield('title', 'CMS Admin - 99 Bakery Jember') - 99 Bakery</title>
+  <title>@yield('title', 'Kelola Admin - 99 Bakery Jember') - 99 Bakery</title>
 
   <!-- Favicon / Logo -->
   <link rel="icon" type="image/jpeg" href="{{ asset('img/logo.jpeg') }}">
