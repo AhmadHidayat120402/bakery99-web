@@ -24,12 +24,14 @@ class ProductBadgeController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:100',
+            'icon' => 'nullable|string|max:50',
             'bg_color' => 'required|string|max:30',
             'text_color' => 'required|string|max:30',
         ]);
 
         ProductBadge::create([
             'name' => $validated['name'],
+            'icon' => $validated['icon'] ?? null,
             'bg_color' => $validated['bg_color'],
             'text_color' => $validated['text_color'],
             'is_active' => true,
@@ -45,12 +47,14 @@ class ProductBadgeController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:100',
+            'icon' => 'nullable|string|max:50',
             'bg_color' => 'required|string|max:30',
             'text_color' => 'required|string|max:30',
             'is_active' => 'nullable|boolean',
         ]);
 
         $badge->name = $validated['name'];
+        $badge->icon = $validated['icon'] ?? null;
         $badge->bg_color = $validated['bg_color'];
         $badge->text_color = $validated['text_color'];
         if ($request->has('is_active')) {

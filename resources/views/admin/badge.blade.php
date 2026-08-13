@@ -69,11 +69,13 @@
           <td class="fw-bold text-muted">{{ $loop->iteration }}</td>
           <td>
             <span class="badge px-3 py-1.5 rounded-pill shadow-sm fw-bold" style="background-color: {{ $badge->bg_color }}; color: {{ $badge->text_color }}; font-size: 0.78rem;">
-              {{ $badge->name }}
+              @if($badge->icon)<i class="{{ $badge->icon }} me-1"></i>@endif{{ $badge->name }}
             </span>
           </td>
           <td>
-            <div class="fw-bold text-dark name">{{ $badge->name }}</div>
+            <div class="fw-bold text-dark name">
+              @if($badge->icon)<i class="{{ $badge->icon }} me-1 text-muted"></i>@endif{{ $badge->name }}
+            </div>
           </td>
           <td>
             <div class="d-flex align-items-center gap-2">
@@ -130,7 +132,48 @@
 
                   <div class="mb-3">
                     <label class="form-label fw-semibold small">Nama Label Badge</label>
-                    <input type="text" name="name" class="form-control" value="{{ $badge->name }}" required>
+                    <input type="text" name="name" class="form-control input-name-edit-{{ $badge->id }}" value="{{ $badge->name }}" required>
+                  </div>
+
+                  <!-- PILIH IKON BADGE EDIT -->
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold small d-block">Pilih Ikon Badge</label>
+                    <input type="hidden" name="icon" class="input-icon-edit-{{ $badge->id }}" value="{{ $badge->icon }}">
+                    <div class="d-flex flex-wrap gap-2">
+                      <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-edit-{{ $badge->id }} {{ $badge->icon == 'bi bi-gift-fill' ? 'active' : '' }}" data-icon="bi bi-gift-fill"><i class="bi bi-gift-fill me-1"></i> Hadiah</button>
+                      <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-edit-{{ $badge->id }} {{ $badge->icon == 'bi bi-star-fill' ? 'active' : '' }}" data-icon="bi bi-star-fill"><i class="bi bi-star-fill me-1"></i> Bintang</button>
+                      <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-edit-{{ $badge->id }} {{ $badge->icon == 'bi bi-fire' ? 'active' : '' }}" data-icon="bi bi-fire"><i class="bi bi-fire me-1"></i> Api</button>
+                      <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-edit-{{ $badge->id }} {{ $badge->icon == 'bi bi-heart-fill' ? 'active' : '' }}" data-icon="bi bi-heart-fill"><i class="bi bi-heart-fill me-1"></i> Hati</button>
+                      <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-edit-{{ $badge->id }} {{ $badge->icon == 'bi bi-basket' ? 'active' : '' }}" data-icon="bi bi-basket"><i class="bi bi-basket me-1"></i> Keranjang</button>
+                      <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-edit-{{ $badge->id }} {{ $badge->icon == 'bi bi-rocket-takeoff-fill' ? 'active' : '' }}" data-icon="bi bi-rocket-takeoff-fill"><i class="bi bi-rocket-takeoff-fill me-1"></i> Roket</button>
+                      <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-edit-{{ $badge->id }} {{ $badge->icon == 'bi bi-lightning-fill' ? 'active' : '' }}" data-icon="bi bi-lightning-fill"><i class="bi bi-lightning-fill me-1"></i> Kilat</button>
+                      <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-edit-{{ $badge->id }} {{ $badge->icon == 'bi bi-award-fill' ? 'active' : '' }}" data-icon="bi bi-award-fill"><i class="bi bi-award-fill me-1"></i> Medali</button>
+                      <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-edit-{{ $badge->id }} {{ $badge->icon == 'bi bi-patch-check-fill' ? 'active' : '' }}" data-icon="bi bi-patch-check-fill"><i class="bi bi-patch-check-fill me-1"></i> Centang</button>
+                      <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-edit-{{ $badge->id }} {{ $badge->icon == 'bi bi-tag-fill' ? 'active' : '' }}" data-icon="bi bi-tag-fill"><i class="bi bi-tag-fill me-1"></i> Tag Promo</button>
+                      <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-edit-{{ $badge->id }} {{ $badge->icon == 'bi bi-percent' ? 'active' : '' }}" data-icon="bi bi-percent"><i class="bi bi-percent me-1"></i> Diskon</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill btn-icon-preset-edit-{{ $badge->id }} {{ empty($badge->icon) ? 'active' : '' }}" data-icon="">(Tanpa Ikon)</button>
+                    </div>
+                  </div>
+
+                  <!-- PILIHAN WARNA CEPAT (PRESETS) -->
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold small d-block">Pilihan Preset Warna Cepat</label>
+                    <div class="d-flex flex-wrap gap-2">
+                      <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#B78103" data-text="#FFFFFF" style="background-color: #B78103;">Gold Emas</button>
+                      <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#C62828" data-text="#FFFFFF" style="background-color: #C62828;">Merah 99</button>
+                      <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#E65100" data-text="#FFFFFF" style="background-color: #E65100;">Oranye</button>
+                      <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#2E7D32" data-text="#FFFFFF" style="background-color: #2E7D32;">Hijau Daily</button>
+                      <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#6A1B9A" data-text="#FFFFFF" style="background-color: #6A1B9A;">Ungu Spesial</button>
+                      <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#1565C0" data-text="#FFFFFF" style="background-color: #1565C0;">Biru New</button>
+                      
+                      <!-- LIGHT / PASTEL PRESETS -->
+                      <button type="button" class="btn btn-sm px-3 rounded-pill border btn-preset-color fw-bold" data-bg="#FFF8E1" data-text="#B78103" style="background-color: #FFF8E1; color: #B78103; border-color: #FFE082 !important;">Light Gold</button>
+                      <button type="button" class="btn btn-sm px-3 rounded-pill border btn-preset-color fw-bold" data-bg="#FFEBEE" data-text="#C62828" style="background-color: #FFEBEE; color: #C62828; border-color: #FFCDD2 !important;">Light Merah</button>
+                      <button type="button" class="btn btn-sm px-3 rounded-pill border btn-preset-color fw-bold" data-bg="#FFF3E0" data-text="#E65100" style="background-color: #FFF3E0; color: #E65100; border-color: #FFE0B2 !important;">Light Oranye</button>
+                      <button type="button" class="btn btn-sm px-3 rounded-pill border btn-preset-color fw-bold" data-bg="#E8F5E9" data-text="#2E7D32" style="background-color: #E8F5E9; color: #2E7D32; border-color: #C8E6C9 !important;">Light Hijau</button>
+                      <button type="button" class="btn btn-sm px-3 rounded-pill border btn-preset-color fw-bold" data-bg="#F3E5F5" data-text="#6A1B9A" style="background-color: #F3E5F5; color: #6A1B9A; border-color: #E1BEE7 !important;">Light Ungu</button>
+                      <button type="button" class="btn btn-sm px-3 rounded-pill border btn-preset-color fw-bold" data-bg="#E3F2FD" data-text="#1565C0" style="background-color: #E3F2FD; color: #1565C0; border-color: #BBDEFB !important;">Light Biru</button>
+                    </div>
                   </div>
 
                   <div class="row g-2 mb-3">
@@ -154,7 +197,7 @@
                   <div class="mb-3 p-3 bg-light rounded-3 text-center border">
                     <span class="small text-muted d-block mb-2">Pratinjau Tampilan Badge:</span>
                     <span class="badge px-4 py-2 rounded-pill shadow-sm fw-bold preview-badge-target-edit-{{ $badge->id }}" style="background-color: {{ $badge->bg_color }}; color: {{ $badge->text_color }}; font-size: 0.85rem;">
-                      {{ $badge->name }}
+                      @if($badge->icon)<i class="{{ $badge->icon }} me-1"></i>@endif{{ $badge->name }}
                     </span>
                   </div>
 
@@ -211,19 +254,47 @@
           
           <div class="mb-3">
             <label class="form-label fw-semibold small">Nama Label Badge</label>
-            <input type="text" name="name" id="inputNameCreate" class="form-control" placeholder="Contoh: ⭐ Best Seller / Fresh Daily" required>
+            <input type="text" name="name" id="inputNameCreate" class="form-control" placeholder="Contoh: Best Seller / Fresh Daily" required>
+          </div>
+
+          <!-- PILIH IKON BADGE CREATE -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold small d-block">Pilih Ikon Badge</label>
+            <input type="hidden" name="icon" id="inputIconCreate" value="bi bi-gift-fill">
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-create active" data-icon="bi bi-gift-fill"><i class="bi bi-gift-fill me-1"></i> Hadiah</button>
+              <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-create" data-icon="bi bi-star-fill"><i class="bi bi-star-fill me-1"></i> Bintang</button>
+              <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-create" data-icon="bi bi-fire"><i class="bi bi-fire me-1"></i> Api</button>
+              <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-create" data-icon="bi bi-heart-fill"><i class="bi bi-heart-fill me-1"></i> Hati</button>
+              <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-create" data-icon="bi bi-basket"><i class="bi bi-basket me-1"></i> Keranjang</button>
+              <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-create" data-icon="bi bi-rocket-takeoff-fill"><i class="bi bi-rocket-takeoff-fill me-1"></i> Roket</button>
+              <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-create" data-icon="bi bi-lightning-fill"><i class="bi bi-lightning-fill me-1"></i> Kilat</button>
+              <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-create" data-icon="bi bi-award-fill"><i class="bi bi-award-fill me-1"></i> Medali</button>
+              <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-create" data-icon="bi bi-patch-check-fill"><i class="bi bi-patch-check-fill me-1"></i> Centang</button>
+              <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-create" data-icon="bi bi-tag-fill"><i class="bi bi-tag-fill me-1"></i> Tag Promo</button>
+              <button type="button" class="btn btn-sm btn-outline-dark rounded-pill btn-icon-preset-create" data-icon="bi bi-percent"><i class="bi bi-percent me-1"></i> Diskon</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill btn-icon-preset-create" data-icon="">(Tanpa Ikon)</button>
+            </div>
           </div>
 
           <!-- PILIHAN WARNA CEPAT (PRESETS) -->
           <div class="mb-3">
             <label class="form-label fw-semibold small d-block">Pilihan Preset Warna Cepat</label>
             <div class="d-flex flex-wrap gap-2">
-              <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#B78103" data-text="#FFFFFF" style="background-color: #B78103;">⭐ Gold Emas</button>
-              <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#C62828" data-text="#FFFFFF" style="background-color: #C62828;">❤️ Merah 99</button>
-              <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#E65100" data-text="#FFFFFF" style="background-color: #E65100;">🍊 Oranye</button>
-              <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#2E7D32" data-text="#FFFFFF" style="background-color: #2E7D32;">🍃 Hijau Daily</button>
-              <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#6A1B9A" data-text="#FFFFFF" style="background-color: #6A1B9A;">💜 Ungu Spesial</button>
-              <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#1565C0" data-text="#FFFFFF" style="background-color: #1565C0;">💙 Biru New</button>
+              <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#B78103" data-text="#FFFFFF" style="background-color: #B78103;">Gold Emas</button>
+              <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#C62828" data-text="#FFFFFF" style="background-color: #C62828;">Merah 99</button>
+              <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#E65100" data-text="#FFFFFF" style="background-color: #E65100;">Oranye</button>
+              <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#2E7D32" data-text="#FFFFFF" style="background-color: #2E7D32;">Hijau Daily</button>
+              <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#6A1B9A" data-text="#FFFFFF" style="background-color: #6A1B9A;">Ungu Spesial</button>
+              <button type="button" class="btn btn-sm text-white px-3 rounded-pill btn-preset-color" data-bg="#1565C0" data-text="#FFFFFF" style="background-color: #1565C0;">Biru New</button>
+              
+              <!-- LIGHT / PASTEL PRESETS -->
+              <button type="button" class="btn btn-sm px-3 rounded-pill border btn-preset-color fw-bold" data-bg="#FFF8E1" data-text="#B78103" style="background-color: #FFF8E1; color: #B78103; border-color: #FFE082 !important;">Light Gold</button>
+              <button type="button" class="btn btn-sm px-3 rounded-pill border btn-preset-color fw-bold" data-bg="#FFEBEE" data-text="#C62828" style="background-color: #FFEBEE; color: #C62828; border-color: #FFCDD2 !important;">Light Merah</button>
+              <button type="button" class="btn btn-sm px-3 rounded-pill border btn-preset-color fw-bold" data-bg="#FFF3E0" data-text="#E65100" style="background-color: #FFF3E0; color: #E65100; border-color: #FFE0B2 !important;">Light Oranye</button>
+              <button type="button" class="btn btn-sm px-3 rounded-pill border btn-preset-color fw-bold" data-bg="#E8F5E9" data-text="#2E7D32" style="background-color: #E8F5E9; color: #2E7D32; border-color: #C8E6C9 !important;">Light Hijau</button>
+              <button type="button" class="btn btn-sm px-3 rounded-pill border btn-preset-color fw-bold" data-bg="#F3E5F5" data-text="#6A1B9A" style="background-color: #F3E5F5; color: #6A1B9A; border-color: #E1BEE7 !important;">Light Ungu</button>
+              <button type="button" class="btn btn-sm px-3 rounded-pill border btn-preset-color fw-bold" data-bg="#E3F2FD" data-text="#1565C0" style="background-color: #E3F2FD; color: #1565C0; border-color: #BBDEFB !important;">Light Biru</button>
             </div>
           </div>
 
@@ -248,7 +319,7 @@
           <div class="mb-3 p-3 bg-light rounded-3 text-center border">
             <span class="small text-muted d-block mb-2">Pratinjau Tampilan Badge:</span>
             <span class="badge px-4 py-2 rounded-pill shadow-sm fw-bold" id="previewBadgeTargetCreate" style="background-color: #B78103; color: #FFFFFF; font-size: 0.85rem;">
-              ⭐ Best Seller
+              <i class="bi bi-gift-fill me-1"></i> Best Seller
             </span>
           </div>
 
@@ -267,6 +338,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   // Synchronize Color Pickers and Live Preview for Create Modal
   const inputNameCreate = document.getElementById('inputNameCreate');
+  const inputIconCreate = document.getElementById('inputIconCreate');
   const colorPickerBgCreate = document.getElementById('colorPickerBgCreate');
   const colorTextBgCreate = document.getElementById('colorTextBgCreate');
   const colorPickerTextCreate = document.getElementById('colorPickerTextCreate');
@@ -275,10 +347,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function updateCreatePreview() {
     if (!previewBadgeTargetCreate) return;
-    previewBadgeTargetCreate.textContent = inputNameCreate.value || 'Contoh Badge';
+    const name = inputNameCreate.value || 'Contoh Badge';
+    const iconClass = inputIconCreate ? inputIconCreate.value : '';
+    const iconHtml = iconClass ? `<i class="${iconClass} me-1"></i>` : '';
+    previewBadgeTargetCreate.innerHTML = `${iconHtml}${name}`;
     previewBadgeTargetCreate.style.backgroundColor = colorTextBgCreate.value;
     previewBadgeTargetCreate.style.color = colorTextCreate.value;
   }
+
+  document.querySelectorAll('.btn-icon-preset-create').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.btn-icon-preset-create').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const icon = this.getAttribute('data-icon');
+      if (inputIconCreate) inputIconCreate.value = icon;
+      updateCreatePreview();
+    });
+  });
 
   if (colorPickerBgCreate) {
     colorPickerBgCreate.addEventListener('input', function() {
@@ -297,19 +382,88 @@ document.addEventListener('DOMContentLoaded', function () {
       colorPickerTextCreate.value = this.value;
       updateCreatePreview();
     });
-    inputNameCreate.addEventListener('input', updateCreatePreview);
+    if (inputNameCreate) inputNameCreate.addEventListener('input', updateCreatePreview);
   }
 
-  // Preset Buttons Click Handler
+  // Live Preview Event Listeners for Edit Modals
+  @foreach($badges as $badge)
+  (function() {
+    const badgeId = "{{ $badge->id }}";
+    const nameInput = document.querySelector('.input-name-edit-' + badgeId);
+    const iconInput = document.querySelector('.input-icon-edit-' + badgeId);
+    const colorBgPicker = document.querySelector('.color-picker-bg-edit-' + badgeId);
+    const colorBgText = document.querySelector('.color-text-bg-edit-' + badgeId);
+    const colorTextPicker = document.querySelector('.color-picker-text-edit-' + badgeId);
+    const colorTextVal = document.querySelector('.color-text-text-edit-' + badgeId);
+    const previewEl = document.querySelector('.preview-badge-target-edit-' + badgeId);
+
+    function updateEditPreview() {
+      if (!previewEl) return;
+      const name = nameInput ? nameInput.value : '';
+      const iconClass = iconInput ? iconInput.value : '';
+      const iconHtml = iconClass ? `<i class="${iconClass} me-1"></i>` : '';
+      previewEl.innerHTML = `${iconHtml}${name}`;
+      if (colorBgText) previewEl.style.backgroundColor = colorBgText.value;
+      if (colorTextVal) previewEl.style.color = colorTextVal.value;
+    }
+
+    document.querySelectorAll('.btn-icon-preset-edit-' + badgeId).forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.btn-icon-preset-edit-' + badgeId).forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const icon = this.getAttribute('data-icon');
+        if (iconInput) iconInput.value = icon;
+        updateEditPreview();
+      });
+    });
+
+    if (colorBgPicker && colorBgText) {
+      colorBgPicker.addEventListener('input', function() {
+        colorBgText.value = this.value;
+        updateEditPreview();
+      });
+      colorBgText.addEventListener('input', function() {
+        colorBgPicker.value = this.value;
+        updateEditPreview();
+      });
+    }
+    if (colorTextPicker && colorTextVal) {
+      colorTextPicker.addEventListener('input', function() {
+        colorTextVal.value = this.value;
+        updateEditPreview();
+      });
+      colorTextVal.addEventListener('input', function() {
+        colorTextPicker.value = this.value;
+        updateEditPreview();
+      });
+    }
+    if (nameInput) nameInput.addEventListener('input', updateEditPreview);
+  })();
+  @endforeach
+
+  // Preset Buttons Click Handler (Works for Create & Edit Modals)
   document.querySelectorAll('.btn-preset-color').forEach(function(btn) {
     btn.addEventListener('click', function() {
       const bg = this.getAttribute('data-bg');
       const text = this.getAttribute('data-text');
-      colorPickerBgCreate.value = bg;
-      colorTextBgCreate.value = bg;
-      colorPickerTextCreate.value = text;
-      colorTextCreate.value = text;
-      updateCreatePreview();
+      const modal = this.closest('.modal');
+      if (modal) {
+        const bgPicker = modal.querySelector('input[type="color"]');
+        const bgText = modal.querySelector('input[name="bg_color"]');
+        const textPickers = modal.querySelectorAll('input[type="color"]');
+        const textVal = modal.querySelector('input[name="text_color"]');
+
+        if (textPickers && textPickers[0]) textPickers[0].value = bg;
+        if (bgText) {
+          bgText.value = bg;
+          bgText.dispatchEvent(new Event('input'));
+        }
+        if (textPickers && textPickers[1]) textPickers[1].value = text;
+        if (textVal) {
+          textVal.value = text;
+          textVal.dispatchEvent(new Event('input'));
+        }
+      }
     });
   });
 

@@ -173,7 +173,7 @@ Cocok untuk hajatan, pengajian, syukuran, rapat, acara keluarga, dan berbagai mo
             <div class="product-img-box">
               @if($product->badge)
                 <span class="product-badge shadow-sm" style="background-color: {{ $product->badge->bg_color }}; color: {{ $product->badge->text_color }};">
-                  {{ $product->badge->name }}
+                  @if($product->badge->icon)<i class="{{ $product->badge->icon }} me-1"></i>@endif{{ $product->badge->name }}
                 </span>
               @endif
               <img src="{{ asset($product->image) }}" loading="lazy" class="product-img lazy-blur" alt="{{ $product->name }}">

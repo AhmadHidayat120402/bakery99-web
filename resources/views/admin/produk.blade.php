@@ -100,7 +100,7 @@
           <td>
             @if($product->badge)
               <span class="badge px-2.5 py-1 rounded-pill fw-bold shadow-sm" style="background-color: {{ $product->badge->bg_color }}; color: {{ $product->badge->text_color }}; font-size: 0.75rem;">
-                {{ $product->badge->name }}
+                @if($product->badge->icon)<i class="{{ $product->badge->icon }} me-1"></i>@endif{{ $product->badge->name }}
               </span>
             @else
               <span class="badge bg-secondary">Tanpa Badge</span>
@@ -185,15 +185,53 @@
                       <label class="form-label fw-semibold small">Satuan</label>
                       <input type="text" name="unit" class="form-control" value="{{ $product->unit }}" placeholder="box / pcs / loyang">
                     </div>
-                    <div class="col-6">
-                      <label class="form-label fw-semibold small">Badge Promo</label>
-                      <select name="product_badge_id" class="form-select">
-                        <option value="">Tanpa Badge</option>
-                        @foreach($badges as $b)
-                          <option value="{{ $b->id }}" {{ $product->product_badge_id == $b->id ? 'selected' : '' }}>{{ $b->name }}</option>
-                        @endforeach
-                      </select>
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold small d-block mb-1">Badge Promo (Opsional)</label>
+                    <input type="hidden" name="product_badge_id" class="input-badge-edit-{{ $product->id }}" value="{{ $product->product_badge_id }}">
+                    <div class="d-flex flex-wrap gap-2 mb-2">
+                      <button type="button" 
+                              class="btn btn-sm rounded-pill badge-picker-pill btn-badge-picker-edit-{{ $product->id }} {{ empty($product->product_badge_id) ? 'btn-dark text-white active shadow-sm' : 'btn-outline-secondary' }}" 
+                              data-badge-id=""
+                              data-bg=""
+                              data-text=""
+                              data-name="(Tanpa Badge)">
+                        (Tanpa Badge)
+                        <i class="bi bi-check-circle-fill ms-1 check-icon {{ empty($product->product_badge_id) ? '' : 'd-none' }}"></i>
+                      </button>
+                      @foreach($badges as $b)
+                        @php
+                          $isSelected = ($product->product_badge_id == $b->id);
+                          $darkColor = (strtolower($b->text_color) == '#ffffff') ? $b->bg_color : $b->text_color;
+                        @endphp
+                        <button type="button" 
+                                class="btn btn-sm rounded-pill badge-picker-pill btn-badge-picker-edit-{{ $product->id }} {{ $isSelected ? 'active' : '' }}" 
+                                data-badge-id="{{ $b->id }}" 
+                                data-bg="{{ $b->bg_color }}" 
+                                data-text="{{ $b->text_color }}"
+                                data-dark-color="{{ $darkColor }}"
+                                data-name="{{ $b->name }}"
+                                data-icon="{{ $b->icon }}"
+                                style="background-color: {{ $isSelected ? $b->bg_color : 'transparent' }}; color: {{ $isSelected ? $b->text_color : $darkColor }}; border: 1px solid {{ $darkColor }}; font-weight: 600;">
+                          @if($b->icon)<i class="{{ $b->icon }} me-1"></i>@endif{{ $b->name }}
+                          <i class="bi bi-check-circle-fill ms-1 check-icon {{ $isSelected ? '' : 'd-none' }}"></i>
+                        </button>
+                      @endforeach
                     </div>
+
+                    <!-- LIVE PREVIEW BADGE TERPILIH EDIT -->
+                    <div class="p-2 px-3 bg-light rounded-3 border text-center">
+                      <span class="small text-muted me-2" style="font-size: 0.78rem;">Badge Terpilih:</span>
+                      <span class="preview-badge-selected-edit-{{ $product->id }}">
+                        @if($product->badge)
+                          <span class="badge px-3 py-1 rounded-pill shadow-sm fw-bold" style="background-color: {{ $product->badge->bg_color }}; color: {{ $product->badge->text_color }}; font-size: 0.78rem;">
+                            @if($product->badge->icon)<i class="{{ $product->badge->icon }} me-1"></i>@endif{{ $product->badge->name }}
+                          </span>
+                        @else
+                          <span class="badge bg-secondary rounded-pill px-3 py-1" style="font-size: 0.78rem;">Tanpa Badge</span>
+                        @endif
+                      </span>
+                    </div>
+                  </div>
                   </div>
 
                   <!-- UPLOAD FOTO WITH LIVE PREVIEW EDIT -->
@@ -294,15 +332,47 @@
               <label class="form-label fw-semibold small">Satuan</label>
               <input type="text" name="unit" class="form-control" placeholder="box / pcs / loyang" value="pcs">
             </div>
-            <div class="col-6">
-              <label class="form-label fw-semibold small">Badge Promo</label>
-              <select name="product_badge_id" class="form-select">
-                <option value="">Tanpa Badge</option>
-                @foreach($badges as $b)
-                  <option value="{{ $b->id }}">{{ $b->name }}</option>
-                @endforeach
-              </select>
+          <!-- BADGE PROMO PILL SELECTOR -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold small d-block mb-1">Badge Promo (Opsional)</label>
+            <input type="hidden" name="product_badge_id" id="inputBadgeCreate" value="">
+            <div class="d-flex flex-wrap gap-2 mb-2">
+              <button type="button" 
+                      class="btn btn-sm btn-dark text-white rounded-pill badge-picker-pill btn-badge-picker-create active shadow-sm" 
+                      data-badge-id=""
+                      data-bg=""
+                      data-text=""
+                      data-name="(Tanpa Badge)">
+                (Tanpa Badge)
+                <i class="bi bi-check-circle-fill ms-1 check-icon"></i>
+              </button>
+              @foreach($badges as $b)
+                @php
+                  $darkColor = (strtolower($b->text_color) == '#ffffff') ? $b->bg_color : $b->text_color;
+                @endphp
+                <button type="button" 
+                        class="btn btn-sm rounded-pill badge-picker-pill btn-badge-picker-create" 
+                        data-badge-id="{{ $b->id }}"
+                        data-bg="{{ $b->bg_color }}"
+                        data-text="{{ $b->text_color }}"
+                        data-dark-color="{{ $darkColor }}"
+                        data-name="{{ $b->name }}"
+                        data-icon="{{ $b->icon }}"
+                        style="border: 1px solid {{ $darkColor }}; color: {{ $darkColor }}; background-color: transparent; font-weight: 600;">
+                  @if($b->icon)<i class="{{ $b->icon }} me-1"></i>@endif{{ $b->name }}
+                  <i class="bi bi-check-circle-fill ms-1 check-icon d-none"></i>
+                </button>
+              @endforeach
             </div>
+
+            <!-- LIVE PREVIEW BADGE TERPILIH CREATE -->
+            <div class="p-2 px-3 bg-light rounded-3 border text-center">
+              <span class="small text-muted me-2" style="font-size: 0.78rem;">Badge Terpilih:</span>
+              <span id="previewBadgeSelectedCreate">
+                <span class="badge bg-secondary rounded-pill px-3 py-1" style="font-size: 0.78rem;">Tanpa Badge</span>
+              </span>
+            </div>
+          </div>
           </div>
 
           <!-- UPLOAD FOTO WITH LIVE PREVIEW TAMBAH -->
@@ -684,6 +754,141 @@ document.addEventListener('DOMContentLoaded', function () {
       if (toastWrapper) toastWrapper.remove();
     }, 3000);
   }
+
+  // 7.5. Badge Picker Pill Buttons Handler for Create & Edit Product Modals (Opsi 1 Shimmer Wave & Theme Glow Shadow)
+  function hexToRgba(hex, alpha) {
+    if (!hex || hex.charAt(0) !== '#') return 'rgba(0,0,0,' + alpha + ')';
+    let c = hex.substring(1);
+    if (c.length === 3) c = c.split('').map(x => x + x).join('');
+    let num = parseInt(c, 16);
+    return `rgba(${(num >> 16) & 255}, ${(num >> 8) & 255}, ${num & 255}, ${alpha})`;
+  }
+
+  const inputBadgeCreate = document.getElementById('inputBadgeCreate');
+  const previewBadgeSelectedCreate = document.getElementById('previewBadgeSelectedCreate');
+
+  document.querySelectorAll('.btn-badge-picker-create').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.btn-badge-picker-create').forEach(b => {
+        b.classList.remove('active');
+        b.style.boxShadow = 'none';
+        const check = b.querySelector('.check-icon');
+        if (check) check.classList.add('d-none');
+
+        const darkColor = b.getAttribute('data-dark-color') || b.getAttribute('data-bg');
+        if (darkColor) {
+          b.style.backgroundColor = 'transparent';
+          b.style.color = darkColor;
+          b.style.border = '1px solid ' + darkColor;
+        } else {
+          b.className = 'btn btn-sm btn-outline-secondary rounded-pill badge-picker-pill btn-badge-picker-create';
+          b.style.border = '';
+        }
+      });
+
+      this.classList.add('active');
+      const check = this.querySelector('.check-icon');
+      if (check) check.classList.remove('d-none');
+
+      const badgeId = this.getAttribute('data-badge-id');
+      if (inputBadgeCreate) inputBadgeCreate.value = badgeId;
+
+      const bg = this.getAttribute('data-bg');
+      const text = this.getAttribute('data-text');
+      const darkColor = this.getAttribute('data-dark-color') || bg;
+      const name = this.getAttribute('data-name');
+      const icon = this.getAttribute('data-icon');
+
+      if (bg && text) {
+        this.style.backgroundColor = bg;
+        this.style.color = text;
+        this.style.border = '1px solid ' + darkColor;
+        this.style.boxShadow = '0 4px 14px ' + hexToRgba(darkColor, 0.45);
+
+        const iconHtml = icon ? `<i class="${icon} me-1"></i>` : '';
+        if (previewBadgeSelectedCreate) {
+          previewBadgeSelectedCreate.innerHTML = `<span class="badge px-3 py-1 rounded-pill shadow-sm fw-bold" style="background-color: ${bg}; color: ${text}; font-size: 0.78rem;">${iconHtml}${name}</span>`;
+        }
+      } else {
+        this.className = 'btn btn-sm btn-dark text-white rounded-pill badge-picker-pill btn-badge-picker-create active';
+        this.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+        if (previewBadgeSelectedCreate) {
+          previewBadgeSelectedCreate.innerHTML = `<span class="badge bg-secondary rounded-pill px-3 py-1" style="font-size: 0.78rem;">Tanpa Badge</span>`;
+        }
+      }
+    });
+  });
+
+  @foreach($products as $product)
+  (function() {
+    const productId = "{{ $product->id }}";
+    const inputBadgeEdit = document.querySelector('.input-badge-edit-' + productId);
+    const previewBadgeEdit = document.querySelector('.preview-badge-selected-edit-' + productId);
+
+    document.querySelectorAll('.btn-badge-picker-edit-' + productId).forEach(function(btn) {
+      // Set initial glow shadow on pre-selected button
+      if (btn.classList.contains('active')) {
+        const bg = btn.getAttribute('data-bg');
+        const darkColor = btn.getAttribute('data-dark-color') || bg;
+        if (darkColor) {
+          btn.style.boxShadow = '0 4px 14px ' + hexToRgba(darkColor, 0.45);
+        } else {
+          btn.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+        }
+      }
+
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.btn-badge-picker-edit-' + productId).forEach(b => {
+          b.classList.remove('active');
+          b.style.boxShadow = 'none';
+          const check = b.querySelector('.check-icon');
+          if (check) check.classList.add('d-none');
+
+          const darkColor = b.getAttribute('data-dark-color') || b.getAttribute('data-bg');
+          if (darkColor) {
+            b.style.backgroundColor = 'transparent';
+            b.style.color = darkColor;
+            b.style.border = '1px solid ' + darkColor;
+          } else {
+            b.className = 'btn btn-sm btn-outline-secondary rounded-pill badge-picker-pill btn-badge-picker-edit-' + productId;
+            b.style.border = '';
+          }
+        });
+
+        this.classList.add('active');
+        const check = this.querySelector('.check-icon');
+        if (check) check.classList.remove('d-none');
+
+        const badgeId = this.getAttribute('data-badge-id');
+        if (inputBadgeEdit) inputBadgeEdit.value = badgeId;
+
+        const bg = this.getAttribute('data-bg');
+        const text = this.getAttribute('data-text');
+        const darkColor = this.getAttribute('data-dark-color') || bg;
+        const name = this.getAttribute('data-name');
+        const icon = this.getAttribute('data-icon');
+
+        if (bg && text) {
+          this.style.backgroundColor = bg;
+          this.style.color = text;
+          this.style.border = '1px solid ' + darkColor;
+          this.style.boxShadow = '0 4px 14px ' + hexToRgba(darkColor, 0.45);
+
+          const iconHtml = icon ? `<i class="${icon} me-1"></i>` : '';
+          if (previewBadgeEdit) {
+            previewBadgeEdit.innerHTML = `<span class="badge px-3 py-1 rounded-pill shadow-sm fw-bold" style="background-color: ${bg}; color: ${text}; font-size: 0.78rem;">${iconHtml}${name}</span>`;
+          }
+        } else {
+          this.className = 'btn btn-sm btn-dark text-white rounded-pill badge-picker-pill btn-badge-picker-edit-' + productId + ' active';
+          this.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+          if (previewBadgeEdit) {
+            previewBadgeEdit.innerHTML = `<span class="badge bg-secondary rounded-pill px-3 py-1" style="font-size: 0.78rem;">Tanpa Badge</span>`;
+          }
+        }
+      });
+    });
+  })();
+  @endforeach
 
   // 8. List.js Pagination & Per Page Selector Initialization
   if (document.getElementById('adminProductListApp')) {

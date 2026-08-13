@@ -14,6 +14,7 @@ class ProductBadge extends Model
 
     protected $fillable = [
         'name',
+        'icon',
         'bg_color',
         'text_color',
         'is_active',

@@ -623,3 +623,42 @@ tr:hover .drag-handle-cell .drag-icon {
     align-items: flex-start;
   }
 }
+
+/* Custom Animated Shimmer Badge Picker */
+.badge-picker-pill {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+}
+
+.badge-picker-pill.active {
+  transform: translateY(-2px);
+  font-weight: 700;
+}
+
+.badge-picker-pill.active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 100%
+  );
+  animation: badgeShimmerWave 2.8s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes badgeShimmerWave {
+  0% {
+    left: -120%;
+  }
+  50%, 100% {
+    left: 130%;
+  }
+}
