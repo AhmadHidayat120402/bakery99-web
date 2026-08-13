@@ -89,9 +89,9 @@
           <td>
             <div class="fw-bold text-dark d-flex align-items-center gap-2">
               <span class="product-name-text name">{{ $product->name }}</span>
-              <span class="badge bg-warning-subtle text-dark border border-warning px-2 py-0.5 rounded-pill fw-bold featured-badge-inline {{ $product->is_popular ? '' : 'd-none' }}" style="font-size: 0.7rem;" title="Tampil di Seksi Produk Unggulan Beranda">
-                <i class="bi bi-star-fill text-warning me-1"></i> Unggulan
-              </span>
+{{--              <span class="badge bg-warning-subtle text-dark border border-warning px-2 py-0.5 rounded-pill fw-bold featured-badge-inline {{ $product->is_popular ? '' : 'd-none' }}" style="font-size: 0.7rem;" title="Tampil di Seksi Produk Unggulan Beranda">--}}
+{{--                <i class="bi bi-star-fill text-warning me-1"></i> Unggulan--}}
+{{--              </span>--}}
             </div>
             <span class="text-muted desc" style="font-size: 0.78rem;">{{ Str::limit($product->description, 45) }}</span>
           </td>
@@ -195,7 +195,7 @@
                       </select>
                     </div>
                   </div>
-                  
+
                   <!-- UPLOAD FOTO WITH LIVE PREVIEW EDIT -->
                   <div class="mb-3">
                     <label class="form-label fw-semibold small d-block">Ganti Foto Produk (Opsional)</label>
@@ -304,7 +304,7 @@
               </select>
             </div>
           </div>
-          
+
           <!-- UPLOAD FOTO WITH LIVE PREVIEW TAMBAH -->
           <div class="mb-3">
             <label class="form-label fw-semibold small d-block">Upload Foto Produk</label>
@@ -405,7 +405,7 @@
         <p class="text-muted small mb-3">
           Saat ini sudah ada <strong>8 produk unggulan</strong> yang tampil di Beranda. Silakan pilih <strong>1 produk</strong> yang ingin dilepas dari status unggulan untuk digantikan dengan <strong class="text-danger" id="swapTargetProductNameText">produk ini</strong>:
         </p>
-        
+
         <div class="list-group mb-4" id="swapProductListGroup">
           @foreach($featuredProducts as $fp)
           <label class="list-group-item list-group-item-action d-flex align-items-center justify-content-between p-2.5 rounded-3 border mb-2 cursor-pointer swap-item-label">
@@ -551,7 +551,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (targetProductToEnable) {
         sendToggleFeatured(targetProductToEnable.id, true, selectedRadio.value, targetProductToEnable.checkbox, targetProductToEnable.name);
-        
+
         const swapModalElem = document.getElementById('modalSwapFeatured');
         if (swapModalElem) {
           const swapModal = bootstrap.Modal.getInstance(swapModalElem);
@@ -665,7 +665,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function showToastMessage(msg) {
     let toastWrapper = document.getElementById('featuredToastAlert');
     if (!toastWrapper) {
-      document.body.insertAdjacentHTML('beforeend', 
+      document.body.insertAdjacentHTML('beforeend',
         '<div id="featuredToastAlert" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1090;">' +
           '<div class="toast align-items-center text-bg-dark border-0 show rounded-4 p-1 shadow-lg" role="alert">' +
             '<div class="d-flex">' +

@@ -62,7 +62,7 @@
 
     <div class="row align-items-center small text-white-75">
       <div class="col-md-6 text-center text-md-start">
-        &copy; {{ date('Y') }} <strong>99 Bakery Jember</strong>. All Rights Reserved.
+        &copy; {{ date('Y') }} <strong>99Bakery</strong>. All Rights Reserved.
       </div>
       <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
         Dibuat dengan rasa cinta & kesegaran setiap hari.
