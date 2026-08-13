@@ -19,7 +19,7 @@
 
   <!-- Base Custom Style & Admin Style -->
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-  <link rel="stylesheet" href="{{ asset('admin/css/admin-style.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin-assets/css/admin-style.css') }}">
 
   <style>
     .login-container {

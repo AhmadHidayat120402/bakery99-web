@@ -36,13 +36,9 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap')
 | Admin CMS Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/admin', function () {
-    return "test";
-});
-
 Route::get('/login', function () {
     return view('public.login');
-})->name('login');
+})->name('admin.login');
 
 Route::prefix('admin')->name('admin.')->group(function () {
 

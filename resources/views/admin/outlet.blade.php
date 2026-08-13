@@ -85,33 +85,4 @@
     </div>
   </div>
 </div>
-
-<!-- STORE FLOATING WA & FOOTER SETTINGS CARD -->
-<div class="admin-card">
-  <div class="admin-card-header">
-    <h5 class="admin-card-title"><i class="bi bi-whatsapp text-success me-2"></i>Pengaturan Floating WhatsApp & Footer Landing Page</h5>
-  </div>
-  <div class="p-4">
-    <form onsubmit="event.preventDefault(); alert('[Simulasi] Pengaturan WhatsApp landing page berhasil disimpan!');">
-      <div class="row g-3">
-        <div class="col-12 col-md-6">
-          <label class="form-label small fw-bold">Nomor WA Pemesanan Utama (Format Internasional)</label>
-          <input type="text" class="form-control" value="6285257220335">
-          <span class="text-muted small">Contoh: 6285257220335 (Digunakan pada tombol melayang / floating WA)</span>
-        </div>
-        <div class="col-12 col-md-6">
-          <label class="form-label small fw-bold">Teks Tombol Floating WA</label>
-          <input type="text" class="form-control" value="Tanya / Pesan via WA">
-        </div>
-        <div class="col-12">
-          <label class="form-label small fw-bold">Draft Pesan WhatsApp Otomatis (Auto-fill Message)</label>
-          <textarea class="form-control" rows="3">Halo Admin 99 Bakery Jember, saya mau tanya/pesan Roti untuk hajatan. Mohon infonya ya!</textarea>
-        </div>
-      </div>
-      <div class="mt-4 text-end">
-        <button type="submit" class="btn-99-primary">Simpan Pengaturan WA & Footer</button>
-      </div>
-    </form>
-  </div>
-</div>
 @endsection
