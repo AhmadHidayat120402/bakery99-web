@@ -10,7 +10,7 @@
 <nav class="navbar navbar-expand-lg navbar-99 sticky-top">
   <div class="container">
     <a class="navbar-brand py-0" href="{{ route('home') }}">
-      <img src="{{ asset('img/logo-new-white.png') }}" alt="99 Bakery Jember" class="d-inline-block align-text-top"
+      <img src="{{ asset('img/logo-new-white.png') }}" alt="Logo 99 Bakery Jember - Spesialis Roti Hajatan & Snack Box" class="d-inline-block align-text-top"
         style="height: 48px; border-radius: 10px;">
     </a>
 

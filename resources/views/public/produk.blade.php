@@ -60,7 +60,7 @@
                 @if($product->badge->icon)<i class="{{ $product->badge->icon }} me-1"></i>@endif{{ $product->badge->name }}
               </span>
             @endif
-            <img src="{{ asset($product->image) }}" loading="lazy" class="product-img lazy-blur" alt="{{ $product->name }}">
+            <img src="{{ asset('img/full-placeholder-icon.jpg') }}" data-src="{{ asset($product->image) }}" loading="lazy" class="product-img lazy-blur-img" alt="{{ $product->name }}">
           </div>
           <div class="product-body">
             <span class="category-slug d-none">{{ $product->category->slug ?? '' }}</span>
@@ -144,6 +144,53 @@
         });
       }
     }
+
+    // 4. Progressive Blur Lazy Loader with IntersectionObserver
+    function initLazyBlurImages() {
+      var lazyImages = document.querySelectorAll('.lazy-blur-img[data-src]');
+
+      var loadImage = function(img) {
+        var actualSrc = img.getAttribute('data-src');
+        if (!actualSrc) return;
+
+        var tempImg = new Image();
+        tempImg.src = actualSrc;
+
+        tempImg.onload = function() {
+          img.src = actualSrc;
+          img.removeAttribute('data-src');
+          img.classList.add('img-loaded');
+        };
+
+        tempImg.onerror = function() {
+          img.src = actualSrc;
+          img.removeAttribute('data-src');
+          img.classList.add('img-loaded');
+        };
+      };
+
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries, obs) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              loadImage(entry.target);
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: '200px 0px' });
+
+        lazyImages.forEach(function(img) { observer.observe(img); });
+      } else {
+        lazyImages.forEach(function(img) { loadImage(img); });
+      }
+    }
+
+    initLazyBlurImages();
+
+    // Re-trigger lazy loader when List.js filters or searches
+    productList.on('updated', function() {
+      initLazyBlurImages();
+    });
   });
 </script>
 @endpush

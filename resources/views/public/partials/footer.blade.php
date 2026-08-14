@@ -5,9 +5,9 @@
 
       <div class="col-lg-4">
         <div class="mb-3 d-flex align-items-center gap-3">
-          <img src="{{ asset('img/logo.jpeg') }}" alt="99 Bakery Jember" class="footer-logo mb-0"
+          <img src="{{ asset('img/logo.jpeg') }}" alt="Logo 99 Bakery Jember - Spesialis Roti Hajatan & Snack Box" class="footer-logo mb-0"
             style="height: 52px; border-radius: 10px;">
-          <img src="{{ asset('img/logo-halal.png') }}" alt="Halal Indonesia" class="footer-logo mb-0"
+          <img src="{{ asset('img/logo-halal.png') }}" alt="Sertifikat Halal Indonesia - 99 Bakery Jember" class="footer-logo mb-0"
             style="height: 52px; border-radius: 10px; object-fit: contain;">
         </div>
         <p class="small text-white-75 mb-0">

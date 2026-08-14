@@ -29,7 +29,7 @@
         <div class="position-relative">
           <img src="{{ asset('img/outlet.webp') }}" loading="lazy"
             class="img-fluid rounded-4 shadow-lg border border-3 border-white w-100 lazy-blur"
-            alt="Komitmen Kualitas 99 Bakery Jember" style="max-height: 580px; object-fit: cover;">
+            alt="Gerai Toko Roti 99 Bakery Jember - Komitmen Kualitas 100% Halal & Fresh Daily" style="max-height: 580px; object-fit: cover;">
           <div
             class="position-absolute bottom-0 start-0 m-3 bg-white bg-opacity-95 backdrop-blur px-3 py-2 rounded-3 shadow-sm border border-white">
             <span class="fw-bold text-danger fs-7"><i class="bi bi-patch-check-fill text-danger me-1"></i> 100% Halal

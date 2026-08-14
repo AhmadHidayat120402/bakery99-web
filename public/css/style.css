@@ -1860,3 +1860,21 @@ footer a:hover {
   border-radius: 12px;
   background: var(--primary-red);
 }
+
+/* ==========================================================================
+   PROGRESSIVE BLUR LAZY LOADING WITH PLACEHOLDER
+   ========================================================================== */
+.lazy-blur,
+.lazy-blur-img {
+  filter: blur(1.5px);
+  opacity: 0.75;
+  transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: filter, opacity;
+  object-fit: cover;
+}
+
+.lazy-blur.img-loaded,
+.lazy-blur-img.img-loaded {
+  filter: blur(0) brightness(1);
+  opacity: 1;
+}
