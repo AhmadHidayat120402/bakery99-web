@@ -321,6 +321,19 @@
                                                     value="{{ $user->email }}" required>
 
                                             </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">
+                                                    Password Baru
+                                                </label>
+
+                                                <input type="password" name="password" class="form-control"
+                                                    placeholder="Kosongkan jika tidak ingin mengubah password">
+
+                                                <small class="text-muted">
+                                                    Minimal 8 karakter. Kosongkan jika password tidak ingin diubah.
+                                                </small>
+                                            </div>
                                         </div>
 
 

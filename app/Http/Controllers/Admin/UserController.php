@@ -59,6 +59,7 @@ class UserController extends Controller
                 'max:255',
                 Rule::unique('users', 'email')->ignore($user->id),
             ],
+            'password' => 'nullable|string|min:8',
         ], [
             'name.required' => 'Nama lengkap wajib diisi.',
             'email.required' => 'Email wajib diisi.',
@@ -70,7 +71,7 @@ class UserController extends Controller
         $user->name = $validated['name'];
         $user->email = $validated['email'];
 
-        // Password hanya diubah kalau diisi
+        // Password hanya diubah jika diisi
         if (!empty($validated['password'])) {
             $user->password = Hash::make($validated['password']);
         }

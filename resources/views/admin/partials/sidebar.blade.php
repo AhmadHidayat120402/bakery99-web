@@ -44,8 +44,8 @@
             <i class="bi bi-card-heading"></i>
             <span>Konten Tentang Toko</span>
         </a>
-        <a href="{{ route('admin.outlet') }}"
-            class="nav-link-admin {{ request()->routeIs('admin.outlet') ? 'active' : '' }}">
+        <a href="{{ route('admin.outlets.index') }}"
+            class="nav-link-admin {{ request()->routeIs('admin.outlets.index') ? 'active' : '' }}">
             <i class="bi bi-shop"></i>
             <span>Outlet & Kontak WA</span>
         </a>
@@ -215,8 +215,8 @@
                 <i class="bi bi-patch-check-fill"></i>
                 <span>Badge Promo</span>
             </a>
-            <a href="{{ route('admin.outlet') }}"
-                class="nav-link-admin {{ request()->routeIs('admin.outlet') ? 'active' : '' }}">
+            <a href="{{ route('admin.outlets.index') }}"
+                class="nav-link-admin {{ request()->routeIs('admin.outlets.index') ? 'active' : '' }}">
                 <i class="bi bi-shop"></i>
                 <span>Outlet & Kontak WA</span>
             </a>

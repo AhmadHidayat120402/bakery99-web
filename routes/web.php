@@ -7,18 +7,13 @@ use App\Http\Controllers\Admin\ProductBadgeController as AdminProductBadgeContro
 use App\Http\Controllers\Admin\ProductCategoryController as AdminProductCategoryController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\OutletController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\ProductController as PublicProductController;
 use App\Http\Controllers\Public\SitemapController;
 use App\Models\AboutContent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Public Web Routes
-|--------------------------------------------------------------------------
-*/
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/produk', [PublicProductController::class, 'index'])->name('produk');
@@ -30,20 +25,11 @@ Route::get('/tentang', function () {
     return view('public.tentang', compact('about'));
 })->name('tentang');
 
-Route::get('/outlet', function () {
-    return view('public.outlet');
-})->name('outlet');
+Route::get('/outlet', [App\Http\Controllers\Public\OutletController::class, 'index'])
+    ->name('outlet');
 
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
-// Batch Image Compression Utility Route
-// Route::get('/resize', [App\Http\Controllers\ImageResizeController::class, 'resizeAll'])->name('resize');
-
-/*
-|--------------------------------------------------------------------------
-| Admin CMS Routes
-|--------------------------------------------------------------------------
-*/
 Route::get('/login', [AuthController::class, 'showLogin'])
     ->name('admin.login');
 
@@ -57,7 +43,6 @@ Route::middleware('auth')
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
-
 
         Route::get('/', function () {
             return redirect()->route('admin.dashboard');
@@ -94,9 +79,17 @@ Route::middleware('auth')
         Route::put('/produk/{product}', [AdminProductController::class, 'update'])->name('produk.update');
         Route::delete('/produk/{product}', [AdminProductController::class, 'destroy'])->name('produk.destroy');
 
-        Route::get('/outlet', function () {
-            return view('admin.outlet');
-        })->name('outlet');
+        Route::get('/outlet', [OutletController::class, 'index'])
+            ->name('outlets.index');
+
+        Route::post('/outlet', [OutletController::class, 'store'])
+            ->name('outlets.store');
+
+        Route::put('/outlet/{outlet}', [OutletController::class, 'update'])
+            ->name('outlets.update');
+
+        Route::delete('/outlet/{outlet}', [OutletController::class, 'destroy'])
+            ->name('outlets.destroy');
 
         Route::get('/about', [AboutContentController::class, 'index'])
             ->name('about.index');
