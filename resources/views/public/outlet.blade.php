@@ -83,7 +83,7 @@
                             <!-- HEADER -->
                             <!-- ========================= -->
 
-                            <div class="outlet-header-hero">
+                            <div class="outlet-header-hero position-relative overflow-hidden" @if($outlet->image) style="background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 100%), url('{{ asset('storage/' . $outlet->image) }}') center/cover no-repeat; min-height: 200px;" @endif>
 
                                 <!-- STATUS -->
                                 <span class="status-badge-pill outlet-status" data-hours="{{ $outlet->operating_hours }}">
@@ -91,30 +91,22 @@
                                     Memuat Status...
                                 </span>
 
-
                                 <!-- ICON -->
                                 <div class="outlet-icon-badge">
-
                                     @if ($outlet->is_main)
                                         <i class="bi bi-building"></i>
                                     @else
                                         <i class="bi bi-shop"></i>
                                     @endif
-
                                 </div>
-
 
                                 <!-- NAMA -->
                                 <h3 class="outlet-hero-title">
-
                                     {{ $outlet->name }}
-
                                 </h3>
-
 
                                 <!-- TAG -->
                                 <div class="outlet-hero-tag">
-
                                     @if ($outlet->is_main)
                                         <i class="bi bi-star-fill text-warning me-1"></i>
                                         Dapur Utama & Penjualan Pusat
@@ -122,7 +114,6 @@
                                         <i class="bi bi-geo-fill me-1"></i>
                                         Gerai 99 Bakery
                                     @endif
-
                                 </div>
 
                             </div>
@@ -134,118 +125,75 @@
 
                             <div class="outlet-body-content">
 
-
                                 <!-- ALAMAT -->
                                 <div class="outlet-info-row">
-
                                     <div class="outlet-info-icon">
                                         <i class="bi bi-geo-alt-fill"></i>
                                     </div>
-
                                     <div>
-
                                         <div class="outlet-info-label">
                                             Alamat Gerai
                                         </div>
-
                                         <div class="outlet-info-text">
                                             {{ $outlet->address }}
                                         </div>
-
                                     </div>
-
                                 </div>
-
 
                                 <!-- JAM OPERASIONAL -->
                                 <div class="outlet-info-row">
-
                                     <div class="outlet-info-icon">
                                         <i class="bi bi-clock-fill"></i>
                                     </div>
-
                                     <div>
-
                                         <div class="outlet-info-label">
                                             Jam Operasional
                                         </div>
-
                                         <div class="outlet-info-text">
                                             {{ $outlet->operating_hours }}
                                         </div>
-
                                     </div>
-
                                 </div>
-
 
                                 <!-- WHATSAPP -->
                                 <div class="outlet-info-row">
-
                                     <div class="outlet-info-icon">
                                         <i class="bi bi-whatsapp"></i>
                                     </div>
-
                                     <div>
-
                                         <div class="outlet-info-label">
                                             Kontak Direct WA
                                         </div>
-
                                         <div class="outlet-info-text">
                                             {{ $outlet->phone_whatsapp }}
                                         </div>
-
                                     </div>
-
                                 </div>
 
-
-                                <!-- BENEFITS -->
+                                <!-- BENEFITS / FEATURES -->
                                 <div class="outlet-chip-group">
-
-                                    @if ($outlet->is_main)
-                                        <span class="outlet-chip">
-                                            <i class="bi bi-check-circle-fill text-success"></i>
-                                            Dapur Produksi Utama
-                                        </span>
-
-                                        <span class="outlet-chip">
-                                            <i class="bi bi-check-circle-fill text-success"></i>
-                                            Pesanan Syukuran
-                                        </span>
-
-                                        <span class="outlet-chip">
-                                            <i class="bi bi-check-circle-fill text-success"></i>
-                                            Takeaway & Retail
-                                        </span>
-
-                                        <span class="outlet-chip">
-                                            <i class="bi bi-check-circle-fill text-success"></i>
-                                            Parkir Luas
-                                        </span>
+                                    @if (!empty($outlet->features))
+                                        @foreach (explode(',', $outlet->features) as $featureItem)
+                                            @if (trim($featureItem))
+                                                <span class="outlet-chip">
+                                                    <i class="bi bi-check-circle-fill text-success"></i>
+                                                    {{ trim($featureItem) }}
+                                                </span>
+                                            @endif
+                                        @endforeach
                                     @else
-                                        <span class="outlet-chip">
-                                            <i class="bi bi-check-circle-fill text-success"></i>
-                                            Roti Fresh Harian
-                                        </span>
-
-                                        <span class="outlet-chip">
-                                            <i class="bi bi-check-circle-fill text-success"></i>
-                                            Snack Box Rapat
-                                        </span>
-
-                                        <span class="outlet-chip">
-                                            <i class="bi bi-check-circle-fill text-success"></i>
-                                            Dessert Box
-                                        </span>
-
-                                        <span class="outlet-chip">
-                                            <i class="bi bi-check-circle-fill text-success"></i>
-                                            Akses Mudah
-                                        </span>
+                                        @if ($outlet->is_main)
+                                            <span class="outlet-chip"><i class="bi bi-check-circle-fill text-success"></i> Dapur Produksi Utama</span>
+                                            <span class="outlet-chip"><i class="bi bi-check-circle-fill text-success"></i> Pesanan Syukuran</span>
+                                            <span class="outlet-chip"><i class="bi bi-check-circle-fill text-success"></i> Takeaway & Retail</span>
+                                            <span class="outlet-chip"><i class="bi bi-check-circle-fill text-success"></i> Parkir Luas</span>
+                                        @else
+                                            <span class="outlet-chip"><i class="bi bi-check-circle-fill text-success"></i> Roti Fresh Harian</span>
+                                            <span class="outlet-chip"><i class="bi bi-check-circle-fill text-success"></i> Snack Box Rapat</span>
+                                            <span class="outlet-chip"><i class="bi bi-check-circle-fill text-success"></i> Dessert Box</span>
+                                            <span class="outlet-chip"><i class="bi bi-check-circle-fill text-success"></i> Akses Mudah</span>
+                                        @endif
                                     @endif
-
                                 </div>
 
 

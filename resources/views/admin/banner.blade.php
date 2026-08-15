@@ -126,7 +126,7 @@
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
               <div class="modal-header bg-dark text-white py-3">
-                <h5 class="modal-title fw-bold fs-6"><i class="bi bi-pencil-square me-1"></i> Edit Slide Banner</h5>
+                <h5 class="modal-title fw-bold fs-6 text-white"><i class="bi bi-pencil-square me-1"></i> Edit Slide Banner</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body p-4">
@@ -200,7 +200,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
       <div class="modal-header bg-danger text-white py-3">
-        <h5 class="modal-title fw-bold fs-6"><i class="bi bi-plus-circle me-1"></i> Tambah Slide Banner Baru</h5>
+        <h5 class="modal-title fw-bold fs-6 text-white"><i class="bi bi-plus-circle me-1"></i> Tambah Slide Banner Baru</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-4">

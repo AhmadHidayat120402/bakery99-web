@@ -15,14 +15,18 @@ use App\Models\AboutContent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Admin\DashboardController;
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/produk', [PublicProductController::class, 'index'])->name('produk');
 
 Route::get('/tentang', function () {
-
     $about = AboutContent::first();
+    $activeOutlets = \App\Models\Outlet::where('is_active', true)->get();
+    $outletsCount = $activeOutlets->count();
+    $outletNames = $activeOutlets->pluck('name')->implode(' & ');
 
-    return view('public.tentang', compact('about'));
+    return view('public.tentang', compact('about', 'outletsCount', 'outletNames'));
 })->name('tentang');
 
 Route::get('/outlet', [App\Http\Controllers\Public\OutletController::class, 'index'])
@@ -48,9 +52,7 @@ Route::middleware('auth')
             return redirect()->route('admin.dashboard');
         });
 
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
-        })->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         // Admin Banner Routes
         Route::get('/banner', [AdminBannerController::class, 'index'])->name('banner');

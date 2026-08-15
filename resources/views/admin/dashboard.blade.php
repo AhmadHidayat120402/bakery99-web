@@ -13,54 +13,58 @@
 
 <!-- STAT CARDS ROW -->
 <div class="row g-3 mb-4">
+  <!-- CARD 1: BANNER -->
   <div class="col-12 col-sm-6 col-xl-3">
     <div class="stat-card-99">
       <div class="d-flex justify-content-between align-items-start">
         <div class="stat-card-icon stat-icon-red">
           <i class="bi bi-images"></i>
         </div>
-        <span class="badge bg-success">Aktif</span>
+        <span class="badge bg-success">{{ $activeBannersCount }} Aktif</span>
       </div>
-      <div class="stat-value">3 Banner</div>
+      <div class="stat-value">{{ $bannersCount }} Banner</div>
       <div class="stat-label">Slide Carousel Hero Utama</div>
     </div>
   </div>
 
+  <!-- CARD 2: KATEGORI PRODUK (MENGGANTIKAN KEUNGGULAN) -->
   <div class="col-12 col-sm-6 col-xl-3">
     <div class="stat-card-99">
       <div class="d-flex justify-content-between align-items-start">
         <div class="stat-card-icon stat-icon-gold">
-          <i class="bi bi-card-heading"></i>
+          <i class="bi bi-grid-fill"></i>
         </div>
-        <span class="badge bg-success">Terisi</span>
+        <span class="badge bg-warning text-dark">Terisi</span>
       </div>
-      <div class="stat-value">4 Poin</div>
-      <div class="stat-label">Keunggulan Toko Roti</div>
+      <div class="stat-value">{{ $categoriesCount }} Kategori</div>
+      <div class="stat-label">Kategori Produk Roti & Kue</div>
     </div>
   </div>
 
+  <!-- CARD 3: PRODUK -->
   <div class="col-12 col-sm-6 col-xl-3">
     <div class="stat-card-99">
       <div class="d-flex justify-content-between align-items-start">
         <div class="stat-card-icon stat-icon-blue">
           <i class="bi bi-tags-fill"></i>
         </div>
-        <span class="badge bg-primary">4 Kategori</span>
+        <span class="badge bg-primary">{{ $categoriesCount }} Kategori</span>
       </div>
-      <div class="stat-value">42 Produk</div>
-      <div class="stat-label">Tampil di Katalog Landing Page</div>
+      <div class="stat-value">{{ $productsCount }} Produk</div>
+      <div class="stat-label">Tampil di Halaman Katalog Produk</div>
     </div>
   </div>
 
+  <!-- CARD 4: OUTLET -->
   <div class="col-12 col-sm-6 col-xl-3">
     <div class="stat-card-99">
       <div class="d-flex justify-content-between align-items-start">
         <div class="stat-card-icon stat-icon-green">
           <i class="bi bi-shop"></i>
         </div>
-        <span class="badge bg-success">2 Cabang</span>
+        <span class="badge bg-success">{{ $activeOutletsCount }} Cabang</span>
       </div>
-      <div class="stat-value">2 Outlet</div>
+      <div class="stat-value">{{ $outletsCount }} Outlet</div>
       <div class="stat-label">Lokasi & WA Landing Page</div>
     </div>
   </div>

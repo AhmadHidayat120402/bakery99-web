@@ -17,9 +17,9 @@
             </nav>
             <div>
                 <h1 class="h2 fw-extrabold mb-1">Profil Perusahaan & Nilai <span class="text-danger">SONGO</span></h1>
-                <p class="text-muted mb-0 small">Mengenal perjalanan 99 Bakery Jember dalam menghadirkan roti hajatan,
-                    brownies,
-                    bolen, dan kue basah berkualitas tinggi dengan kehangatan rasa keluarga.</p>
+                <p class="text-muted mb-0 small">
+                    {{ $about?->hero_subtitle ?? 'Mengenal perjalanan 99 Bakery Jember dalam menghadirkan roti hajatan, brownies, bolen, dan kue basah berkualitas tinggi dengan kehangatan rasa keluarga.' }}
+                </p>
             </div>
         </div>
     </section>
@@ -33,27 +33,13 @@
                         <img src="{{ $about && $about->store_photo ? asset('storage/' . $about->store_photo) : asset('img/outlet.webp') }}"
                             loading="lazy"
                             class="img-fluid rounded-4 shadow-lg border border-3 border-white w-100 lazy-blur"
-                            alt="{{ $about->title ?? '99 Bakery Jember' }}" style="max-height: 580px; object-fit: cover;">
-                        @if ($about && $about->tagline)
+                            alt="{{ $about?->title ?? '99 Bakery Jember' }}" style="max-height: 580px; object-fit: cover;">
+                        @if ($about?->tagline)
                             <div
                                 class="position-absolute bottom-0 start-0 m-3 bg-white bg-opacity-95 backdrop-blur px-3 py-2 rounded-3 shadow-sm border border-white">
                                 <span class="fw-bold text-danger fs-7"><i
                                         class="bi bi-patch-check-fill text-danger me-1"></i>
-                                    {{ $about->tagline ?? 'Komitmen Kualitas 100% Halal & Fresh Daily' }}</span>
-                            </div>
-                        @endif
-
-
-                        {{-- Logo Halal --}}
-                        @if ($about && $about->halal_logo)
-                            <div class="position-absolute bottom-0 end-0 m-3
-                                   bg-white rounded-3 shadow
-                                   p-2 border border-white"
-                                style="width: 80px; height: 80px;">
-
-                                <img src="{{ asset('storage/' . $about->halal_logo) }}" alt="Sertifikasi Halal 99 Bakery"
-                                    class="w-100 h-100" style="object-fit: contain;">
-
+                                    {{ $about->tagline }}</span>
                             </div>
                         @endif
                     </div>
@@ -61,11 +47,16 @@
                 <div class="col-lg-6">
                     <div class="section-badge">KOMITMEN KUALITAS</div>
                     <h2 class="section-title">
-                        {{ $about->title ?? 'Solusi Roti Fresh & Terpercaya' }}
+                        {{ $about?->title ?? 'Solusi Roti Fresh & Terpercaya' }}
                     </h2>
-                    @if ($about && $about->description)
+                    @if ($about?->description)
+                        @php
+                            $formattedDescription = e($about->description);
+                            $formattedDescription = preg_replace('/\*\*(.*?)\*\*/s', '<strong>$1</strong>', $formattedDescription);
+                            $formattedDescription = nl2br($formattedDescription);
+                        @endphp
                         <p class="text-muted mb-4" style="line-height:1.8;">
-                            {!! nl2br(e($about->description)) !!}
+                            {!! $formattedDescription !!}
                         </p>
                     @endif
                     <div class="row g-3">

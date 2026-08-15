@@ -18,6 +18,7 @@ class Outlet extends Model
         'phone_whatsapp',
         'google_maps_url',
         'operating_hours',
+        'features',
         'image',
         'is_main',
         'is_active',

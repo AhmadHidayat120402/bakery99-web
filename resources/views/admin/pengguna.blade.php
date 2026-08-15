@@ -275,7 +275,7 @@
 
                                     <div class="modal-header bg-dark text-white">
 
-                                        <h5 class="modal-title fw-bold fs-6">
+                                        <h5 class="modal-title fw-bold fs-6 text-white">
 
                                             <i class="bi bi-pencil-square me-1"></i>
 
@@ -394,7 +394,7 @@
 
                 <div class="modal-header bg-danger text-white">
 
-                    <h5 class="modal-title fw-bold fs-6">
+                    <h5 class="modal-title fw-bold fs-6 text-white">
 
                         <i class="bi bi-person-plus-fill me-1"></i>
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Outlet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class OutletController extends Controller
 {
@@ -27,7 +28,8 @@ class OutletController extends Controller
             'phone_whatsapp' => 'nullable|string|max:30',
             'google_maps_url' => 'nullable|url|max:1000',
             'operating_hours' => 'required|string|max:255',
-            'image' => 'nullable|string|max:255',
+            'features' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
             'is_main' => 'nullable|boolean',
             'is_active' => 'nullable|boolean',
         ], [
@@ -35,6 +37,8 @@ class OutletController extends Controller
             'address.required' => 'Alamat outlet wajib diisi.',
             'operating_hours.required' => 'Jam operasional wajib diisi.',
             'google_maps_url.url' => 'Link Google Maps tidak valid.',
+            'image.image' => 'File yang diunggah harus berupa gambar.',
+            'image.max' => 'Ukuran gambar maksimal 5MB.',
         ]);
 
         /*
@@ -45,7 +49,6 @@ class OutletController extends Controller
 
         $slug = Str::slug($request->name);
 
-        // Pastikan slug unik
         $originalSlug = $slug;
         $counter = 1;
 
@@ -56,8 +59,7 @@ class OutletController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Jika outlet ini menjadi outlet utama,
-        | outlet utama sebelumnya dibuat false
+        | jika outlet ini menjadi outlet utama
         |--------------------------------------------------------------------------
         */
 
@@ -67,6 +69,17 @@ class OutletController extends Controller
             Outlet::query()->update([
                 'is_main' => false
             ]);
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Upload Image
+        |--------------------------------------------------------------------------
+        */
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('outlets', 'public');
         }
 
         /*
@@ -82,7 +95,8 @@ class OutletController extends Controller
             'phone_whatsapp' => $validated['phone_whatsapp'] ?? null,
             'google_maps_url' => $validated['google_maps_url'] ?? null,
             'operating_hours' => $validated['operating_hours'],
-            'image' => $validated['image'] ?? null,
+            'features' => $validated['features'] ?? null,
+            'image' => $imagePath,
             'is_main' => $isMain,
             'is_active' => $request->boolean('is_active'),
         ]);
@@ -103,7 +117,8 @@ class OutletController extends Controller
             'phone_whatsapp' => 'nullable|string|max:30',
             'google_maps_url' => 'nullable|url|max:1000',
             'operating_hours' => 'required|string|max:255',
-            'image' => 'nullable|string|max:255',
+            'features' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
             'is_main' => 'nullable|boolean',
             'is_active' => 'nullable|boolean',
         ], [
@@ -111,6 +126,8 @@ class OutletController extends Controller
             'address.required' => 'Alamat outlet wajib diisi.',
             'operating_hours.required' => 'Jam operasional wajib diisi.',
             'google_maps_url.url' => 'Link Google Maps tidak valid.',
+            'image.image' => 'File yang diunggah harus berupa gambar.',
+            'image.max' => 'Ukuran gambar maksimal 5MB.',
         ]);
 
         /*
@@ -150,6 +167,21 @@ class OutletController extends Controller
 
         /*
         |--------------------------------------------------------------------------
+        | Upload Image Baru
+        |--------------------------------------------------------------------------
+        */
+
+        $imagePath = $outlet->image;
+        if ($request->hasFile('image')) {
+            if ($outlet->image && Storage::disk('public')->exists($outlet->image)) {
+                Storage::disk('public')->delete($outlet->image);
+            }
+
+            $imagePath = $request->file('image')->store('outlets', 'public');
+        }
+
+        /*
+        |--------------------------------------------------------------------------
         | Update
         |--------------------------------------------------------------------------
         */
@@ -161,7 +193,8 @@ class OutletController extends Controller
             'phone_whatsapp' => $validated['phone_whatsapp'] ?? null,
             'google_maps_url' => $validated['google_maps_url'] ?? null,
             'operating_hours' => $validated['operating_hours'],
-            'image' => $validated['image'] ?? null,
+            'features' => $validated['features'] ?? null,
+            'image' => $imagePath,
             'is_main' => $isMain,
             'is_active' => $request->boolean('is_active'),
         ]);
@@ -176,6 +209,10 @@ class OutletController extends Controller
      */
     public function destroy(Outlet $outlet)
     {
+        if ($outlet->image && Storage::disk('public')->exists($outlet->image)) {
+            Storage::disk('public')->delete($outlet->image);
+        }
+
         $outlet->delete();
 
         return redirect()

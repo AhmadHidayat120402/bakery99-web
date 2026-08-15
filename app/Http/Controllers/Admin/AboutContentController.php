@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AboutContent;
+use App\Models\Outlet;
 use Illuminate\Support\Facades\Storage;
 
 class AboutContentController extends Controller
@@ -12,8 +13,11 @@ class AboutContentController extends Controller
     public function index()
     {
         $about = AboutContent::first();
+        $activeOutlets = Outlet::where('is_active', true)->get();
+        $outletsCount = $activeOutlets->count();
+        $outletNames = $activeOutlets->pluck('name')->implode(' & ');
 
-        return view('admin.tentang', compact('about'));
+        return view('admin.tentang', compact('about', 'outletsCount', 'outletNames'));
     }
 
     /**
@@ -24,6 +28,7 @@ class AboutContentController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'tagline' => 'required|string|max:255',
+            'hero_subtitle' => 'nullable|string',
             'description' => 'required|string',
 
             'store_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
@@ -58,6 +63,7 @@ class AboutContentController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'tagline' => 'required|string|max:255',
+            'hero_subtitle' => 'nullable|string',
             'description' => 'required|string',
 
             'store_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',

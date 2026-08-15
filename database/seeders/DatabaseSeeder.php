@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             ProductBadgeSeeder::class,
             ProductSeeder::class,
             OutletSeeder::class,
+            AboutContentSeeder::class,
             BannerSeeder::class,
             FaqSeeder::class,
             SettingSeeder::class,

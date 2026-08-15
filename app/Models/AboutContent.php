@@ -9,6 +9,7 @@ class AboutContent extends Model
     protected $fillable = [
         'title',
         'tagline',
+        'hero_subtitle',
         'description',
         'store_photo',
         'halal_logo',
