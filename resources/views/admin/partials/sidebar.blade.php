@@ -39,8 +39,8 @@
             <i class="bi bi-patch-check-fill"></i>
             <span>Badge Promo</span>
         </a>
-        <a href="{{ route('admin.tentang') }}"
-            class="nav-link-admin {{ request()->routeIs('admin.tentang') ? 'active' : '' }}">
+        <a href="{{ route('admin.about.index') }}"
+            class="nav-link-admin {{ request()->routeIs('admin.about.index') ? 'active' : '' }}">
             <i class="bi bi-card-heading"></i>
             <span>Konten Tentang Toko</span>
         </a>
@@ -195,8 +195,8 @@
                 <i class="bi bi-images"></i>
                 <span>Banner & Carousel Hero</span>
             </a>
-            <a href="{{ route('admin.tentang') }}"
-                class="nav-link-admin {{ request()->routeIs('admin.tentang') ? 'active' : '' }}">
+            <a href="{{ route('admin.about.index') }}"
+                class="nav-link-admin {{ request()->routeIs('admin.about.index') ? 'active' : '' }}">
                 <i class="bi bi-card-heading"></i>
                 <span>Konten Tentang Toko</span>
             </a>

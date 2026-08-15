@@ -1,14 +1,16 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutContentController;
+use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BannerController as AdminBannerController;
 use App\Http\Controllers\Admin\ProductBadgeController as AdminProductBadgeController;
 use App\Http\Controllers\Admin\ProductCategoryController as AdminProductCategoryController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\ProductController as PublicProductController;
 use App\Http\Controllers\Public\SitemapController;
+use App\Models\AboutContent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +24,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/produk', [PublicProductController::class, 'index'])->name('produk');
 
 Route::get('/tentang', function () {
-    return view('public.tentang');
+
+    $about = AboutContent::first();
+
+    return view('public.tentang', compact('about'));
 })->name('tentang');
 
 Route::get('/outlet', function () {
@@ -93,9 +98,14 @@ Route::middleware('auth')
             return view('admin.outlet');
         })->name('outlet');
 
-        Route::get('/tentang', function () {
-            return view('admin.tentang');
-        })->name('tentang');
+        Route::get('/about', [AboutContentController::class, 'index'])
+            ->name('about.index');
+
+        Route::post('/about', [AboutContentController::class, 'store'])
+            ->name('about.store');
+
+        Route::put('/about/{id}', [AboutContentController::class, 'update'])
+            ->name('about.update');
 
         // Admin User Routes
         Route::get('/pengguna', [UserController::class, 'index'])->name('pengguna');
