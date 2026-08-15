@@ -60,7 +60,7 @@
                 @if($product->badge->icon)<i class="{{ $product->badge->icon }} me-1"></i>@endif{{ $product->badge->name }}
               </span>
             @endif
-            <img src="{{ asset('img/full-placeholder-icon.jpg') }}" data-src="{{ asset($product->image) }}" loading="lazy" class="product-img lazy-blur-img" alt="{{ $product->name }}">
+            <img src="{{ asset($product->image) }}" loading="lazy" class="product-img lazy-blur" alt="{{ $product->name }}">
           </div>
           <div class="product-body">
             <span class="category-slug d-none">{{ $product->category->slug ?? '' }}</span>
