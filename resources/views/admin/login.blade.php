@@ -332,8 +332,8 @@
                             background-color: var(--primary-red);
                             border: none;
                         ">
-
-                        <i class="bi bi-box-arrow-in-right me-1"></i>
+<!-- 
+                        <i class="bi bi-box-arrow-in-right me-1"></i> -->
 
                         Login
 
