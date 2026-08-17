@@ -19,7 +19,7 @@
         <p class="text-muted mb-0 small">Temukan varian pilihan roti hajatan, brownies, bolen, kue basah, dessert, dan kue tart fresh setiap hari.</p>
       </div>
       <div>
-        <a href="{{ asset('pdf/catalog.pdf') }}" target="_blank" download class="btn btn-danger btn-sm shadow-sm px-3 py-2 fw-bold d-inline-flex align-items-center gap-2">
+        <a href="{{ asset('pdf/catalog-26.pdf') }}" target="_blank" download class="btn btn-danger btn-sm shadow-sm px-3 py-2 fw-bold d-inline-flex align-items-center gap-2">
           <i class="bi bi-download fs-6"></i> Unduh Katalog (PDF)
         </a>
       </div>

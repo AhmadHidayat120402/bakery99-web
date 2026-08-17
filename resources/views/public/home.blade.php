@@ -27,7 +27,7 @@ Cocok untuk hajatan, pengajian, syukuran, rapat, acara keluarga, dan berbagai mo
           <a href="{{ route('produk') }}" class="btn btn-light text-danger fw-bold btn-lg px-4 shadow-sm">
             <i class="bi bi-grid-fill me-2"></i> Lihat Katalog Produk
           </a>
-          <a href="{{ asset('pdf/catalog.pdf') }}" target="_blank" download class="btn btn-outline-light btn-lg px-4">
+          <a href="{{ asset('pdf/catalog-26.pdf') }}" target="_blank" download class="btn btn-outline-light btn-lg px-4">
             <i class="bi bi-download me-2"></i> Unduh Katalog (PDF)
           </a>
         </div>
